@@ -12,21 +12,27 @@ locDojo(3,4).
 locHQ(5,6).
 locBoss(8,8).
 
-init :- asserta(locPlayer(1,1)).
+initLocPlayer :- asserta(locPlayer(1,1)).
 
 /* Pergerakan Player */
 
-kiri :- locPlayer(1,_), !.
-kiri :- locPlayer(X,Y), X1 is X-1, retract(locPlayer(X,Y)), asserta(locPlayer(X1,Y)).
-kanan :- locPlayer(8,_), !.
-kanan :- locPlayer(X,Y), X1 is X+1, retract(locPlayer(X,Y)), asserta(locPlayer(X1,Y)).
-atas :- locPlayer(1,_), !.
-atas :- locPlayer(X,Y), Y1 is Y-1, retract(locPlayer(X,Y)), asserta(locPlayer(X,Y1)).
-bawah :- locPlayer(8,_), !.
-bawah :- locPlayer(X,Y), Y1 is Y+1, retract(locPlayer(X,Y)), asserta(locPlayer(X,Y1)).
+kiri :- locPlayer(1,_), print_mentok, !.
+kiri :- locPlayer(X,Y), X1 is X-1, retract(locPlayer(X,Y)), asserta(locPlayer(X1,Y)), print_kiri.
+kanan :- locPlayer(8,_), print_mentok, !.
+kanan :- locPlayer(X,Y), X1 is X+1, retract(locPlayer(X,Y)), asserta(locPlayer(X1,Y)), print_kanan.
+atas :- locPlayer(1,_), print_mentok, !.
+atas :- locPlayer(X,Y), Y1 is Y-1, retract(locPlayer(X,Y)), asserta(locPlayer(X,Y1)), print_atas.
+bawah :- locPlayer(8,_), print_mentok, !.
+bawah :- locPlayer(X,Y), Y1 is Y+1, retract(locPlayer(X,Y)), asserta(locPlayer(X,Y1)), print_bawah.
+
+/* Mencetak movement */
+print_kiri :- write('Anda bergerak 1 blok ke arah barat.'), nl.
+print_kanan :- write('Anda bergerak 1 blok ke arah timur.'), nl.
+print_atas :- write('Anda bergerak 1 blok ke arah utara.'), nl.
+print_bawah :- write('Anda bergerak 1 blok ke arah selatan.'), nl.
+print_mentok :- write('Oops! Anda sudah berada di batas map.'), nl.
 
 /* Perintah gerak, input dari user */
-
 w :- atas.
 a :- kiri.
 s :- bawah.
