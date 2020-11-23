@@ -2,6 +2,7 @@
 :- include('character.pl').
 :- include('quest.pl').
 :- include('enemy.pl').
+:- include('battle.pl').
 
 print_start :-
     write('LET\'S FIND DONATELLO!'),nl,nl,
