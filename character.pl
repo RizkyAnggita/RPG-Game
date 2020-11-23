@@ -39,7 +39,7 @@ printstats :-
 
 /* Level Up */
 levelup :-
-    user(CHARACTER,CLASS,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL),
+    user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL),
     write('Congratulations! Level up'),
     write(' Character Name   : '),
     write(CHARACTER), nl,
@@ -54,7 +54,7 @@ levelup :-
         NEWATTACK is ATTACK + 10,
         NEWDEFENCE is DEFENCE + 10,
         retract(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL)), 
-        asserta(user(CHARACTER,CLASS,CURRENTHEALTH,NEWHEALTH,NEWATTACK,NEWDEFENCE,GOLD,NEWLEVEL)),
+        asserta(user(CHARACTER,CLASS,NEWHEALTH,NEWHEALTH,NEWATTACK,NEWDEFENCE,GOLD,NEWLEVEL)),
     write('       =>  '),
     write(NEWLEVEL), nl,
 
