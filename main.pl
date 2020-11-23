@@ -2,6 +2,7 @@
 :- include('character.pl').
 :- include('quest.pl').
 :- include('enemy.pl').
+:- include('inventory.pl').
 :- include('battle.pl').
 
 print_start :-
@@ -26,6 +27,7 @@ start :-
     initLocPlayer,
     initProgressQuest,
     initEnemy,
+    initInventory,
     character.
 
 status :-
