@@ -9,12 +9,12 @@ character(3,raphael,assassin,120,130,110,10).
 
 
 /* User */
-:- dynamic(user/7).
+:- dynamic(user/8).
 
 
 /* Stats */
 printstats :-
-    user(CHARACTER,CLASS,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL),
+    user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL),
     write('Character Name   : '),
     write(CHARACTER), nl,
     write('Chacter Class    : '),
@@ -22,6 +22,8 @@ printstats :-
     write('Level            : '),
     write(LEVEL), nl,
     write('Health           : '),
+    write(CURRENTHEALTH),
+    write(' / '),
     write(HEALTH), nl,
     write('Attack           : '),
     write(ATTACK), nl,
@@ -47,8 +49,8 @@ levelup :-
         NEWHEALTH is HEALTH + 10,
         NEWATTACK is ATTACK + 10,
         NEWDEFENCE is DEFENCE + 10,
-        retract(user(CHARACTER,CLASS,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL)), 
-        asserta(user(CHARACTER,CLASS,NEWHEALTH,NEWATTACK,NEWDEFENCE,GOLD,NEWLEVEL)),
+        retract(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL)), 
+        asserta(user(CHARACTER,CLASS,CURRENTHEALTH,NEWHEALTH,NEWATTACK,NEWDEFENCE,GOLD,NEWLEVEL)),
     write('       =>  '),
     write(NEWLEVEL), nl,
 
@@ -79,8 +81,8 @@ addgold :-
     user(CHARACTER,CLASS,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL),
     write('Gold gained'), nl,
         NEWGOLD is GOLD + 20,
-        retract(user(CHARACTER,CLASS,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL)), 
-        asserta(user(CHARACTER,CLASS,HEALTH,ATTACK,DEFENCE,NEWGOLD,LEVEL)),
+        retract(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL)), 
+        asserta(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,NEWGOLD,LEVEL)),
     write('Total gold : '),
     write(NEWGOLD).
 
@@ -98,20 +100,10 @@ character :-
     /* Mencari karakter sesuai angka*/       
     character(NUM,CHARACTER,CLASS,HEALTH,ATTACK,DEFENCE,GOLD),
     /* Assign karakter dan level ke user */
-    asserta(user(CHARACTER,CLASS,HEALTH,ATTACK,DEFENCE,GOLD,1)),
-    user(CHARACTER,CLASS,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL),
+    asserta(user(CHARACTER,CLASS,HEALTH,HEALTH,ATTACK,DEFENCE,GOLD,1)),
+    user(CHARACTER,CLASS,_,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL),
 
     write('Your character is    : '),
     write(CHARACTER), nl,
     write('Current level        : '),
     write(LEVEL), nl.
-
-
-
-
-
-
-
-
-
-
