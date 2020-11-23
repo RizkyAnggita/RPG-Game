@@ -1,10 +1,7 @@
 :- include('character.pl').
 
-:- dynamic(inventory/7).
+:- dynamic(inventoryData/7).
 
-%Inventory:
-
-%Inventory List
 
 %decodeItemX(<character_id>,<is_item_exist>,<item_name>)
 decodeItem1(1,1,dagger).
@@ -27,15 +24,19 @@ decodeItem4(2,1,karuta).
 decodeItem4(3,1,armor).
 decodeItem4(Any,0,no_item).
 
-%inventory(char_id,item_1, item_2, item_3, item_4, potion_1, potion_2).
+%inventoryData(char_id,item_1, item_2, item_3, item_4, potion_1, potion_2).
 initInventory :-
-    asserta(inventory(1,1,0,0,0,5,0)),
-    asserta(inventory(2,1,0,0,0,5,0)),
-    asserta(inventory(3,1,0,0,0,5,0)).
+    asserta(inventoryData(1,1,0,0,0,5,0)),
+    asserta(inventoryData(2,1,0,0,0,5,0)),
+    asserta(inventoryData(3,1,0,0,0,5,0)).
 
-show_inventory :-
-    user(Name,_,_,_,_,_,_,_), 
-    character(Char_code,Name,_,_,_,_,_),
-    write('Inventory '), write(Name), write(': '), nl,
-    inventory(Char_code,Item_1, Item_2, Item_3, Item_4, Potion_1, Potion_2),
-    nl.
+inventory :-
+    user(Name,Class,_,_,_,_,_,_), 
+    getid(Name,Char_id),
+    format('Inventory of ~w (~w):~n', [Name, Class]),
+    inventoryData(Char_id,Num_item_1, Num_item_2, Num_item_3, Num_item_4, Num_potion_1, Num_potion_2),
+    decodeItem1(Char_id,1,Item_1),
+    decodeItem2(Char_id,1,Item_2),
+    decodeItem3(Char_id,1,Item_3),
+    decodeItem4(Char_id,1,Item_4),
+    format(' ~w: ~w~n ~w: ~w~n ~w: ~w~n ~w: ~w~n Small Health Potion: ~w~n Big Health Potion: ~w~n', [Item_1,Num_item_1,Item_2, Num_item_2, Item_3, Num_item_3, Item_4, Num_item_4, Num_potion_1, Num_potion_2]).

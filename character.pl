@@ -7,6 +7,10 @@ character(1,leonardo,samurai,120,120,120,10).
 character(2,michelangelo,fighter,130,110,120,10).
 character(3,raphael,assassin,120,130,110,10).
 
+/* Get Id Character*/
+getid(leonardo,1).
+getid(michelangelo,2).
+getid(raphael,3).
 
 /* User */
 :- dynamic(user/8).
