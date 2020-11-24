@@ -2,10 +2,19 @@
     Deklarasi Fakta 
 ====================== */
 
+/* Buat Hilangin Warning Gaje, abaikan aja */
+:- discontiguous character/7.
+:- discontiguous getid/2.
+:- discontiguous printstats/0.
+:- discontiguous levelup/0. 
+:- discontiguous addgold/0. 
+:- discontiguous character/0.
+
 /* Character */
 character(1,leonardo,samurai,120,120,120,10).
 character(2,michelangelo,fighter,130,110,120,10).
 character(3,raphael,assassin,120,130,110,10).
+
 
 /* Get Id Character*/
 getid(leonardo,1).
@@ -15,6 +24,10 @@ getid(raphael,3).
 /* User */
 :- dynamic(user/8).
 
+
+/* =====================
+    Deklarasi Rule 
+====================== */
 
 /* Stats */
 printstats :-
@@ -27,7 +40,7 @@ printstats :-
     write(LEVEL), nl,
     write('Health           : '),
     write(CURRENTHEALTH),
-    write(' / '),
+    write('/'),
     write(HEALTH), nl,
     write('Attack           : '),
     write(ATTACK), nl,

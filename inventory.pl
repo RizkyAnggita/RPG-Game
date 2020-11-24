@@ -27,9 +27,9 @@ initInventory :-
     asserta(inventoryData(3,1,0,0,0,5,0)).
 
 printInventory :-
-    user(Name,Class,_,_,_,_,_,_), 
-    getid(Name,Char_id),
-    format('Inventory of ~w (~w):~n', [Name, Class]),
+    user(CHARACTER,CLASS,_,_,_,_,_,_), 
+    getid(CHARACTER,Char_id),
+    format('Inventory of ~w (~w):~n', [CHARACTER, CLASS]),
     inventoryData(Char_id,Num_item_1, Num_item_2, Num_item_3, Num_item_4, Num_potion_1, Num_potion_2),
     decodeItem1(Char_id,1,Item_1),
     decodeItem2(Char_id,1,Item_2),
