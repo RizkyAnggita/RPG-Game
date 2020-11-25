@@ -89,7 +89,8 @@ cek :-
             (NUM =:= 7
             ->
                 (
-                    write('Kamu ngegacha'), nl
+                    write('Kamu ngegacha'), nl,
+                    
                 )
                 ;
                 (
