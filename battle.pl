@@ -14,3 +14,13 @@ userDefending(EnemyId, Dmg):-
 	enemyData(EnemyId, _, _, EnemyAtt, _, _),
 	Dmg is ((EnemyAtt / UserDef) * EnemyAtt).
 	%rumus dmg masih belum pasti
+
+
+% kondisi berhenti battle adalah, run || hp player <= 0 || hp enemy <= 0
+battle :-
+	repeat,
+		write('Num : '),
+		read(X),
+	(X>100; X<50),
+	X < 25,
+	write('Correct number!'), nl, !.
