@@ -8,6 +8,7 @@ pagar(X,9) :- X>(-1), X<10.
 areaPlay(X,Y):- X>0, X<9, Y>0, Y<9.
 
 
+/* Lokasi Statis */
 locDojo(3,4).
 locHQ(5,6).
 locBoss(8,8).
@@ -18,11 +19,11 @@ equalPos(X,Y,A,B):-
     X=:=A,
     Y=:=B.
 
-
+/* Inisialiasi Lokasi Awal Player pada Map */
 initLocPlayer :- asserta(locPlayer(1,1)).
 
-/* Pergerakan Player */
 
+/* Pergerakan Player */
 kiri :- locPlayer(1,_), print_mentok, !.
 kiri :- locPlayer(X,Y), X1 is X-1, retract(locPlayer(X,Y)), asserta(locPlayer(X1,Y)), print_kiri.
 kanan :- locPlayer(8,_), print_mentok, !.
@@ -32,27 +33,72 @@ atas :- locPlayer(X,Y), Y1 is Y-1, retract(locPlayer(X,Y)), asserta(locPlayer(X,
 bawah :- locPlayer(8,_), print_mentok, !.
 bawah :- locPlayer(X,Y), Y1 is Y+1, retract(locPlayer(X,Y)), asserta(locPlayer(X,Y1)), print_bawah.
 
-/* Mencetak movement */
-print_kiri :- write('Anda bergerak 1 blok ke arah barat.'), nl.
-print_kanan :- write('Anda bergerak 1 blok ke arah timur.'), nl.
-print_atas :- write('Anda bergerak 1 blok ke arah utara.'), nl.
-print_bawah :- write('Anda bergerak 1 blok ke arah selatan.'), nl.
-print_mentok :- write('Oops! Anda sudah berada di batas map.'), nl.
 
 /* Perintah gerak, input dari user */
-w :- atas.
-a :- kiri.
-s :- bawah.
-d :- kanan.
+w :- atas, currentlocPlayer.
+a :- kiri, currentlocPlayer.
+s :- bawah, currentlocPlayer.
+d :- kanan, currentlocPlayer.
 
-/* Jika posisi player sama dengan posisi Dojo atau HeadQuarter */ 
+/* Untuk mengecek locPlayer(X,Y) dan sameLoc(X,Y) */
+currentlocPlayer:- 
+    write('Posisi Anda sekarang di '), 
+    locPlayer(X,Y),
+    print(X), write(','), print(Y), nl, 
+    sameLoc(X,Y).
 
+/* Jika posisi player sama dengan posisi Dojo, HeadQuarter atau 
+Enemy(tinggal masuk ke mode battle) */ 
+
+sameLoc(X,Y) :-
+    locPlayer(X,Y),
+    locDojo(X,Y),
+    write('Masuk ke Dojo alias Store'),nl, !.
+
+sameLoc(X,Y) :-
+    locPlayer(X,Y),
+    locHQ(X,Y),
+    statsQuest(S), S =:= 1,
+    nl, printWelcomeQuest,
+    write('Anda masih memiliki Quest!'), nl,
+    write('Selesaikan misi tersebut!'), !.
+    
+sameLoc(X,Y) :-
+    locPlayer(X,Y),
+    locHQ(X,Y),   
+    statsQuest(S), S =:= 0,
+    nl, printWelcomeQuest,    
+    write('Anda mendapatkan sebuah Quest!'), nl,
+    getQuest,
+    write('Quest Anda adalah mendapatkan '),
+    print_getQuest,	write('Selamat berburu!'), nl, !.
+
+sameLoc(X,Y) :-
+    locPlayer(X,Y),
+    locBoss(X,Y),
+    write('Bertemu Boss!'),nl, !.
+
+sameLoc(X,Y) :-
+    locPlayer(X,Y),
+    enemy(_,Name,X,Y,_,_,_,_,_),
+    write('Mode Battle!'), nl, !.
+
+
+/* Mencetak Map */
 printMap(X,Y) :- locPlayer(X,Y), write('P').
 printMap(X,Y) :- pagar(X,Y), write('#').
 printMap(X,Y) :- locDojo(X,Y), write('D').
 printMap(X,Y) :- locHQ(X,Y), write('H').
 printMap(X,Y) :- locBoss(X,Y), write('B').
 printMap(X,Y) :- areaPlay(X,Y), write('-').
+
+
+/* Mencetak movement */
+print_kiri :- write('Anda bergerak 1 blok ke arah barat.'), nl.
+print_kanan :- write('Anda bergerak 1 blok ke arah timur.'), nl.
+print_atas :- write('Anda bergerak 1 blok ke arah utara.'), nl.
+print_bawah :- write('Anda bergerak 1 blok ke arah selatan.'), nl.
+print_mentok :- write('Oops! Anda sudah berada di batas map.'), nl.
 
 
 map :-
