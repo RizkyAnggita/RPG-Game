@@ -39,13 +39,149 @@ shop :-
     read(NUM), nl,
 
     shopitem(NUM,NAMAITEM,HARGA),
-    write(NAMAITEM), write(HARGA),
-    user(CHARACTER,CLASS,_,_,_,_,GOLD,_),
+    user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL),
+    inventoryData(ID,ITEM1,ITEM2,ITEM3,ITEM4,POTION1,POTION2,POTION3,POTION4,POTION5,POTION6),
+
     (GOLD >= HARGA
-    /* Gold Cukup */
-    -> write('duid cukup'); 
-    /* Gold kurang */
-    write('Gold kurang')).
+    ->  
+        (
+            (NUM =:= 1
+            ->
+                (
+                    NEWPOTION1 is POTION1 + 1,
+                    NEWGOLD is GOLD - HARGA,
+                    retract(inventoryData(ID,ITEM1,ITEM2,ITEM3,ITEM4,POTION1,POTION2,POTION3,POTION4,POTION5,POTION6)),
+                    asserta(inventoryData(ID,ITEM1,ITEM2,ITEM3,ITEM4,POTION1,POTION2,POTION3,POTION4,POTION5,POTION6)),
+                    retract(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL)),
+                    asserta(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,NEWGOLD,LEVEL)),
+                    write('Potion SM berhasil dibeli'), nl
+                    
+                )
+                ;
+                (
+                    1 =:= 1
+                )
+            ),
+            %write('duid cukup'),
+
+            (NUM =:= 2
+            ->
+                (
+                    NEWPOTION2 is POTION2 + 1,
+                    NEWGOLD is GOLD - HARGA,
+                    retract(inventoryData(ID,ITEM1,ITEM2,ITEM3,ITEM4,POTION1,POTION2,POTION3,POTION4,POTION5,POTION6)),
+                    asserta(inventoryData(ID,ITEM1,ITEM2,ITEM3,ITEM4,POTION1,NEWPOTION2,POTION3,POTION4,POTION5,POTION6)),
+                    retract(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL)),
+                    asserta(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,NEWGOLD,LEVEL)),
+                    write('Potion MD berhasil dibeli'), nl
+                )
+                ;
+                (
+                    1 =:= 1
+                )
+            ),
+            %write('duid cukup'),
+
+
+            (NUM =:= 3
+            ->
+                (
+                    NEWPOTION3 is POTION3 + 1,
+                    NEWGOLD is GOLD - HARGA,
+                    retract(inventoryData(ID,ITEM1,ITEM2,ITEM3,ITEM4,POTION1,POTION2,POTION3,POTION4,POTION5,POTION6)),
+                    asserta(inventoryData(ID,ITEM1,ITEM2,ITEM3,ITEM4,POTION1,POTION2,NEWPOTION3,POTION4,POTION5,POTION6)),
+                    retract(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL)),
+                    asserta(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,NEWGOLD,LEVEL)),
+                    write('Potion XL berhasil dibeli'), nl
+                )
+                ;
+                (
+                    1 =:= 1
+                )
+            ),
+            %write('duid cukup'),
+
+
+            (NUM =:= 4
+            ->
+                (
+                    NEWPOTION4 is POTION4 + 1,
+                    NEWGOLD is GOLD - HARGA,
+                    retract(inventoryData(ID,ITEM1,ITEM2,ITEM3,ITEM4,POTION1,POTION2,POTION3,POTION4,POTION5,POTION6)),
+                    asserta(inventoryData(ID,ITEM1,ITEM2,ITEM3,ITEM4,POTION1,POTION2,POTION3,NEWPOTION4,POTION5,POTION6)),
+                    retract(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL)),
+                    asserta(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,NEWGOLD,LEVEL)),
+                    write('Hammer of Thor berhasil dibeli'), nl
+                )
+                ;
+                (
+                    1 =:= 1
+                )
+            ),
+            %write('duid cukup'),
+
+
+
+            (NUM =:= 5
+            ->
+                (
+                    NEWPOTION5 is POTION5 + 1,
+                    NEWGOLD is GOLD - HARGA,
+                    retract(inventoryData(ID,ITEM1,ITEM2,ITEM3,ITEM4,POTION1,POTION2,POTION3,POTION4,POTION5,POTION6)),
+                    asserta(inventoryData(ID,ITEM1,ITEM2,ITEM3,ITEM4,POTION1,POTION2,POTION3,POTION4,NEWPOTION5,POTION6)),
+                    retract(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL)),
+                    asserta(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,NEWGOLD,LEVEL)),
+                    write('Dulcolax berhasil dibeli'), nl
+                )
+                ;
+                (
+                    1 =:= 1
+                )
+            ),
+            %write('duid cukup'),
+
+
+
+            (NUM =:= 6
+            ->
+                (
+                    NEWPOTION6 is POTION6 + 1,
+                    NEWGOLD is GOLD - HARGA,
+                    retract(inventoryData(ID,ITEM1,ITEM2,ITEM3,ITEM4,POTION1,POTION2,POTION3,POTION4,POTION5,POTION6)),
+                    asserta(inventoryData(ID,ITEM1,ITEM2,ITEM3,ITEM4,POTION1,POTION2,POTION3,POTION4,POTION5,NEWPOTION6)),
+                    retract(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL)),
+                    asserta(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,NEWGOLD,LEVEL)),
+                    write('Temulawak berhasil dibeli'), nl
+                )
+                ;
+                (
+                    1 =:= 1
+                )
+            ),
+            %write('duid cukup'),
+
+
+
+            (NUM =:= 7
+            ->
+                (
+                    write('Kamu ngegacha'), nl
+                    
+                )
+                ;
+                (
+                    1 =:= 1
+                )
+            ),
+            write('duid cukup')
+
+        )
+    ;  
+        (
+            write('Maaf gold tidak cukupi, silahkan farming lagi'), nl
+        )
+     ).
+
 
 
 
