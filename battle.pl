@@ -4,6 +4,7 @@
 :- dynamic(enemyCurrHP/1).
 :- dynamic(userSpecialAttackCD/1).
 :- dynamic(enemySpecialAttackCD/1).
+:- dynamic(runStatus/1).
 
 hurtEnemy(Dmg) :-
 	enemyCurrHP(EnemyCurrentHP),
@@ -143,6 +144,17 @@ battleCommand(specialAttack, EnemyId) :-
 		)	 
 	),!.
 
+battleCommand(run, EnemyId) :-
+	random(1, 4, X),
+	(X =:= 1 ->
+		runStatus(RunStatus),
+		retract(runStatus(RunStatus)),
+		asserta(runStatus(1))
+		;
+		enemyAttacking(EnemyId, EnemyDmg),
+		enemyData(EnemyId, EnemyName, _, _, _, _),
+		format('~w dealt ~d damage!\n', [EnemyName, EnemyDmg])	
+	), !.
 
 
 % kondisi berhenti battle adalah, run || HP player <= 0 || HP enemy <= 0
@@ -152,6 +164,7 @@ battle(EnemyId):-
 	asserta(enemyCurrHP(EnemyHP)),
 	asserta(userSpecialAttackCD(0)),
 	asserta(enemySpecialAttackCD(0)),
+	asserta(runStatus(0)),
 	repeat,
 		printBattleEnemyStat(EnemyId),nl,nl,
 		printBattleUserStat,nl,nl,
@@ -160,13 +173,15 @@ battle(EnemyId):-
 		battleCommand(Command, EnemyId),
 		enemyCurrHP(EnemyCurrentHPNew),
 		user(_, _, UserCurrentHPNew, _, _, _, _, _),
+		runStatus(RunStatus),
 		nl,
-	(EnemyCurrentHPNew =< 0; UserCurrentHPNew =< 0),
-	retract(enemyCurrHP(EnemyCurrentHPNew)).
+	(EnemyCurrentHPNew =< 0; UserCurrentHPNew =< 0; RunStatus =:= 1),
+	retract(enemyCurrHP(EnemyCurrentHPNew)),
+	retract(runStatus(RunStatus)),
 	userSpecialAttackCD(UserCD),
 	enemySpecialAttackCD(EnemyCD),
 	retract(userSpecialAttackCD(UserCD)),
-	retract(enemySpecialAttackCD(EnemyCD)).	
+	retract(enemySpecialAttackCD(EnemyCD)).
 
 
 
