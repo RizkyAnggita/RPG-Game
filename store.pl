@@ -181,14 +181,15 @@ shop :-
                     random(1,5,ANGKA),
                     decodeItem(ID,1,ANGKA,HASIL),
                     write('Selamat ! kamu mendapatkan '),
-                    write(HASIL),
+                    write(HASIL), nl,
 
                     (ANGKA =:= 1
                     ->
                         (
                             NEWITEM1 is ITEM1 + 1,
                             retract(inventoryData(ID,ITEM1,ITEM2,ITEM3,ITEM4,POTION1,POTION2,POTION3,POTION4,POTION5,POTION6)),
-                            asserta(inventoryData(ID,NEWITEM1,ITEM2,ITEM3,ITEM4,POTION1,POTION2,POTION3,POTION4,POTION5,POTION6))
+                            asserta(inventoryData(ID,NEWITEM1,ITEM2,ITEM3,ITEM4,POTION1,POTION2,POTION3,POTION4,POTION5,POTION6)),
+                            write('HuAHa, gachamu ampas mas'), nl
                         )
                         ;
                         (
