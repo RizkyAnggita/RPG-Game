@@ -3,28 +3,55 @@
 
 :- dynamic(enemyCurrHP/1).
 :- dynamic(userSpecialAttackCD/1).
+:- dynamic(enemySpecialAttackCD/1).
 
+hurtEnemy(Dmg) :-
+	enemyCurrHP(EnemyCurrentHP),
+	EnemyCurrentHPNew is EnemyCurrentHP - Dmg,
+	retract(enemyCurrHP(EnemyCurrentHP)),
+	asserta(enemyCurrHP(EnemyCurrentHPNew)),!.
+	
+hurtUser(Dmg) :-
+	user(Char, Class, UserCurrHP, UserHP, UserAtt, UserDef, Gold, Lvl),
+	UserCurrHPNew is UserCurrHP - Dmg,
+	retract(user(Char, Class, UserCurrHP, UserHP, UserAtt, UserDef, Gold, Lvl)),
+	asserta(user(Char, Class, UserCurrHPNew, UserHP, UserAtt, UserDef, Gold, Lvl)),!.
 
-increaseSpecialAttackCD(userCD) :-
+increaseUserCD :-
 	userSpecialAttackCD(SpecialAttackCD),
 	retract(userSpecialAttackCD(SpecialAttackCD)),
-	asserta(userSpecialAttackCD(3)).
+	asserta(userSpecialAttackCD(3)),!.
 
-decreaseSpecialAttackCD(userCD) :-
+decreaseUserCD :-
 	userSpecialAttackCD(SpecialAttackCD),
 	SpecialAttackCD =\= 0,
 	NewSpecialAttackCD is SpecialAttackCD - 1,
 	retract(userSpecialAttackCD(SpecialAttackCD)),
 	asserta(userSpecialAttackCD(NewSpecialAttackCD)),!.
+
+decreaseUserCD.
 	
-decreaseSpecialAttackCD(userCD).
+increaseEnemyCD :-
+	enemySpecialAttackCD(SpecialAttackCD),
+	retract(enemySpecialAttackCD(SpecialAttackCD)),
+	asserta(enemySpecialAttackCD(3)),!.
+
+decreaseEnemyCD:-
+	enemySpecialAttackCD(SpecialAttackCD),
+	SpecialAttackCD =\= 0,
+	NewSpecialAttackCD is SpecialAttackCD - 1,
+	retract(enemySpecialAttackCD(SpecialAttackCD)),
+	asserta(enemySpecialAttackCD(NewSpecialAttackCD)),!.
+	
+decreaseEnemyCD.
 
 %calculate damage dealt,
 userAttacking(EnemyId, Dmg):-
 	user(_,_, _, _, UserAtt, _, _, _),
 	enemyData(EnemyId, _, _, _, EnemyDef,_),
 	Dmg is (UserAtt),
-	decreaseSpecialAttackCD(userCD).
+	decreaseUserCD,
+	hurtEnemy(Dmg),!.
 	%rumus dmg masih belum pasti
 	
 userSpecialAttacking(EnemyId, Dmg):-
@@ -33,20 +60,35 @@ userSpecialAttacking(EnemyId, Dmg):-
 	user(_,_, _, _, UserAtt, _, _, _),
 	enemyData(EnemyId, _, _, _, EnemyDef,_),
 	Dmg is (UserAtt * 2),
-	increaseSpecialAttackCD(userCD), !.
+	increaseUserCD, 
+	hurtEnemy(Dmg),!.
 	%rumus dmg masih belum pasti
 
 userSpecialAttacking(EnemyId, Dmg):-
 	userSpecialAttackCD(SpecialAttackCD),
 	SpecialAttackCD =\= 0,
 	Dmg is 0,
-	write('Special Attack masih dalam cooldown!\n').	
+	write('Special Attack masih dalam cooldown!\n'),!.	
 	
 
 enemyAttacking(EnemyId, Dmg):-
 	user(_,_, _, _, _, UserDef, _, _),
 	enemyData(EnemyId, _, _, EnemyAtt, _, _),
-	Dmg is (EnemyAtt).
+	enemySpecialAttackCD(EnemyCD),
+	(EnemyCD =:= 0 ->
+		random(1, 4, X),
+		(X =:= 1 ->
+			Dmg is (EnemyAtt * 2),
+			increaseEnemyCD
+			;
+			Dmg is (EnemyAtt),
+			decreaseEnemyCD
+		)
+		;
+		Dmg is (EnemyAtt),
+		decreaseEnemyCD	
+	),
+	hurtUser(Dmg),!.
 	%rumus dmg masih belum pasti
 
 printBattleEnemyStat(EnemyId) :-
@@ -55,13 +97,12 @@ printBattleEnemyStat(EnemyId) :-
 	format('Level: ~d\n', [Lvl]),
 	format('Health: ~d/~d\n', [CurrHP, HP]),
 	format('Attack: ~d\n', [Att]),
-	format('Defense: ~d', [Def]).
+	format('Defense: ~d', [Def]),!.
 	
-hurtEnemy(Dmg) :-
-	enemyCurrHP(EnemyCurrentHP),
-	EnemyCurrentHPNew is EnemyCurrentHP - Dmg,
-	retract(enemyCurrHP(EnemyCurrentHP)),
-	asserta(enemyCurrHP(EnemyCurrentHPNew)),!.
+
+printBattleUserStat :-
+	user(Char, Class, UserCurrHP, UserHP, UserAtt, UserDef, Gold, Lvl),
+	format('Your HP : ~d', [UserCurrHP]).
 
 
 printBattleMenu :-
@@ -75,14 +116,32 @@ printBattleMenu :-
 
 
 battleCommand(attack, EnemyId) :-
-	userAttacking(EnemyId, Dmg),
-	format('You dealt ~d damage!\n', [Dmg]),
-	hurtEnemy(Dmg),!.
+	userAttacking(EnemyId, UserDmg),
+	format('You dealt ~d damage!\n', [UserDmg]),
+	enemyCurrHP(EnemyCurrentHP),
+	(EnemyCurrentHP > 0 ->
+		enemyAttacking(EnemyId, EnemyDmg),
+		enemyData(EnemyId, EnemyName, _, _, _, _),
+		format('~w dealt ~d damage!\n', [EnemyName, EnemyDmg])
+		;
+		write('Enemy defeated!\n')
+	), !.
 
 battleCommand(specialAttack, EnemyId) :-
 	userSpecialAttacking(EnemyId, Dmg),
-	(Dmg =:= 0 -> write('Use other action!\n') ; format('Your special attack dealt ~d damage!\n', [Dmg])),
-	hurtEnemy(Dmg),!.
+	(Dmg =:= 0 -> 
+		write('Use other action!\n') 
+		; 
+		format('Your special attack dealt ~d damage!\n', [Dmg]),
+		enemyCurrHP(EnemyCurrentHP),
+		(EnemyCurrentHP > 0 ->
+			enemyAttacking(EnemyId, EnemyDmg),
+			enemyData(EnemyId, EnemyName, _, _, _, _),
+			format('~w dealt ~d damage!\n', [EnemyName, EnemyDmg])
+			;
+			write('Enemy defeated!\n')
+		)	 
+	),!.
 
 
 
@@ -92,15 +151,22 @@ battle(EnemyId):-
 	format('You found a ~w\n', [EnemyName]),
 	asserta(enemyCurrHP(EnemyHP)),
 	asserta(userSpecialAttackCD(0)),
+	asserta(enemySpecialAttackCD(0)),
 	repeat,
-		printBattleEnemyStat(EnemyId),nl,
+		printBattleEnemyStat(EnemyId),nl,nl,
+		printBattleUserStat,nl,nl,
 		printBattleMenu,nl,nl,
 		read(Command),
 		battleCommand(Command, EnemyId),
 		enemyCurrHP(EnemyCurrentHPNew),
+		user(_, _, UserCurrentHPNew, _, _, _, _, _),
 		nl,
-	(EnemyCurrentHPNew =< 0),
+	(EnemyCurrentHPNew =< 0; UserCurrentHPNew =< 0),
 	retract(enemyCurrHP(EnemyCurrentHPNew)).
+	userSpecialAttackCD(UserCD),
+	enemySpecialAttackCD(EnemyCD),
+	retract(userSpecialAttackCD(UserCD)),
+	retract(enemySpecialAttackCD(EnemyCD)).	
 
 
 

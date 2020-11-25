@@ -6,7 +6,7 @@
 
 
 /* Character */
-character(1,leonardo,samurai,120,10,120,10).
+character(1,leonardo,samurai,120,40,120,10).
 character(2,michelangelo,fighter,130,110,120,10).
 character(3,raphael,assassin,120,130,110,10).
 
