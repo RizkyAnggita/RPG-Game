@@ -5,6 +5,17 @@
 %/* enemy(ID, Name, locX, locY, HP, attack, defense, level, lostCount )
 
 
+testRepeat:-
+    repeat,
+    write("input a number: "),
+    read(X),
+    X>10,
+    X<15,
+    write("SUCCESS!").
+
+/* _-------_ */
+/* | FAKTA | */
+/* ========= */
 /*Enemy default (level 1) = Stage 1 */
 enemyData(99, boss, 1000, 200, 300, 70).
 enemyData(1, shredder,150, 10, 30, 1).
@@ -21,11 +32,8 @@ enemyData(7, shredder, 400, 40, 90, 10).
 enemyData(8, oozma, 200, 80, 75, 10).
 enemyData(9, kappa, 200, 100, 40, 10).
 
-/* Enemy Generator*/
-initEnemyList:-
-    retractall(enemiesPos(_)),
-    asserta(enemiesPos([])),!.
 
+/* Enemy Checker */
 isNoEnemy(_,[]):-!.
 isNoEnemy(New_enemy_pos,List_of_enemy_pos):-
     [X,Y|T] = New_enemy_pos,
@@ -33,25 +41,21 @@ isNoEnemy(New_enemy_pos,List_of_enemy_pos):-
     \+(equalPos(X,Y,X1,Y1)),!,
     isNoEnemy(New_enemy_pos,T1).
 
+
+
+/* Enemy Generator (Shredder, Oozma, Kappa)*/
 assignEnemyPos(X,Y):-
     enemiesPos(Old_list_of_enemy_pos),
     New_list_of_enemy_pos = [X,Y|Old_list_of_enemy_pos],
     retractall(enemiesPos(_)),
     asserta(enemiesPos(New_list_of_enemy_pos)).
-
-/* Test Enemy Pos*/
-pep:-
-    enemiesPos(X),
-    write(X).
-
-
-/* Enemy Generator (Shredder, Oozma, Kappa)*/
-generateShredder(Stage) :-
+gsPortal(Stage) :- /*Stage = 1,2,3. Stage 1 => Lvl 1, Stage 2 => Lvl 5, Stage 3 => Lvl 10*/
     ID is Stage*3 - 2,
     write(ID),nl,
     locDojo(A,B),
     locHQ(C,D),
     locBoss(E,F), 
+    enemiesPos(List_of_enemy_pos),!,
     repeat,
         random(2,8,X1),
         random(2,8,Y1),
@@ -60,7 +64,6 @@ generateShredder(Stage) :-
     \+(equalPos(X1,Y1,A,B)),!,
     \+(equalPos(X1,Y1,C,D)),!,
     \+(equalPos(X1,Y1,E,F)),!,
-    enemiesPos(List_of_enemy_pos),!,
     isNoEnemy([X1,Y1],List_of_enemy_pos),
     X is X1,
     Y is Y1,
@@ -68,12 +71,13 @@ generateShredder(Stage) :-
     asserta(enemy(ID, Name1,X1,Y1, HP1, Atk1, Def1, Lvl1, 0)),
     assignEnemyPos(X,Y).
 
-generateOozma(Stage) :-
+goPortal(Stage) :-
     ID is Stage*3 - 1,
     write(ID),nl,
     locDojo(A,B),
     locHQ(C,D),
     locBoss(E,F), 
+    enemiesPos(List_of_enemy_pos),!,
     repeat,
         random(2,8,X1),
         random(2,8,Y1),
@@ -82,7 +86,6 @@ generateOozma(Stage) :-
     \+(equalPos(X1,Y1,A,B)),!,
     \+(equalPos(X1,Y1,C,D)),!,
     \+(equalPos(X1,Y1,E,F)),!,
-    enemiesPos(List_of_enemy_pos),!,
     isNoEnemy([X1,Y1],List_of_enemy_pos),
     X is X1,
     Y is Y1,
@@ -90,12 +93,13 @@ generateOozma(Stage) :-
     asserta(enemy(ID, Name1,X1,Y1, HP1, Atk1, Def1, Lvl1, 0)),
     assignEnemyPos(X,Y).
 
-generateKappa(Stage) :-
+gkPortal(Stage) :-
     ID is Stage*3,
     write(ID),nl,
     locDojo(A,B),
     locHQ(C,D),
     locBoss(E,F), 
+    enemiesPos(List_of_enemy_pos),!,
     repeat,
         random(2,8,X1),
         random(2,8,Y1),
@@ -104,7 +108,6 @@ generateKappa(Stage) :-
     \+(equalPos(X1,Y1,A,B)),!,
     \+(equalPos(X1,Y1,C,D)),!,
     \+(equalPos(X1,Y1,E,F)),!,
-    enemiesPos(List_of_enemy_pos),!,
     isNoEnemy([X1,Y1],List_of_enemy_pos),
     X is X1,
     Y is Y1,
@@ -112,52 +115,30 @@ generateKappa(Stage) :-
     asserta(enemy(ID, Name1,X1,Y1, HP1, Atk1, Def1, Lvl1, 0)),
     assignEnemyPos(X,Y).
 
+generateShredder(Stage):-
+    repeat,gsPortal(Stage),!.
 
-/* Belum Beres, mau aku lanjutin ^^ */
-initEnemyList:-
-    retractall(enemies(_)),
-    asserta(enemies([])).
+generateOozma(Stage):-
+    repeat,goPortal(Stage),!.
 
-initEnemy :-
-    locDojo(A,B),
-    locHQ(C,D),
-    locBoss(E,F), 
-    write(A), write('-'), write(B), nl,
-    write(C), write('-'), write(D), nl,
-    write(E), write('-'), write(F), nl,
-    generateShredder(1,X1,Y1),
-    repeat,
-        random(2,8,X2),
-        random(2,8,Y2),
-        write(X2),write(','),
-        write(Y2),nl,
-    \+(equalPos(X2,Y2,A,B)),!,
-    \+(equalPos(X2,Y2,C,D)),!,
-    \+(equalPos(X2,Y2,E,F)),!,
-    \+(equalPos(X2,Y2,X1,Y1)),!,
-    enemyData(2, Name2,HP2, Atk2, Def2, Lvl2),
-    asserta(enemy(2, Name2,X2,Y2, HP2, Atk2, Def2, Lvl2, 0)),
-    repeat,
-        random(2,8,X3),
-        random(2,8,Y3),
-        write(X3),write(','),
-        write(Y3),nl,
-    \+(equalPos(X3,Y3,A,B)),!,
-    \+(equalPos(X3,Y3,C,D)),!,
-    \+(equalPos(X3,Y3,E,F)),!,
-    \+(equalPos(X3,Y3,X1,Y1)),!,
-    \+(equalPos(X3,Y3,X2,Y2)),!,
-    enemyData(3, Name3,HP3, Atk3, Def3, Lvl3),
-    asserta(enemy(3, Name3,X3,Y3, HP3, Atk3, Def3, Lvl3, 0)).
+generateKappa(Stage):-
+    repeat,gkPortal(Stage),!.
 
 
-/* Mengacak lokasi kemunculan enemy */
-randomEnemyLoc(Name) :- 
-    random(2,8,X1),
-    random(2,8,Y1),
-    retract(enemy(ID,Name,_,_,C,D,E,F,G)),
-    asserta(enemy(ID,Name, X1, Y1, C, D,E,F,G)).
+/* Inisialisasi */
+initEnemyPosList:-
+    retractall(enemiesPos(_)),
+    asserta(enemiesPos([])).
 
+iePortal :- /*initEnemyPortal*/
+    de,
+    initEnemyPosList,
+    generateShredder(1),
+    generateOozma(1),
+    generateKappa(1).
+
+initEnemy:-
+    repeat,iePortal,!.
 /* Leveling Up Enemy (tapi kayaknya gajadi pake) */
 levelUpEnemy(ID) :-
     enemy(ID,A, B, C, HP, Attack, Defense , Level, H),
@@ -169,12 +150,18 @@ levelUpEnemy(ID) :-
     retract(enemy(ID,A, B, C, HP, Attack, Defense , Level, H)),
     asserta(enemy(NewID, A, B,C, NewHP, NewAttack, NewDefense, NewLevel, H)).
 
-/* Check*/
-pe:-
+/* Printing, Checking, and Demolishing*/
+pe:- /*pe: Print Enemy*/
     enemy(ID,A, B, C, HP, Attack, Defense , Level, H),
     format('~w ~w ~w ~w ~w ~w ~w ~w ~w ', [ID, A, B, C, HP, Attack, Defense, Level, H]).
-    
-de:-
-    retractall(enemy(_,_,_,_,_,_,_,_,_)).
+
+pep:- /*pep: Print Enemy Position*/
+    enemiesPos(X),
+    write(X),!.
+
+
+de:- /*de: Demolish Enemy*/
+    retractall(enemy(_,_,_,_,_,_,_,_,_)),
+    initEnemyPosList.
 
 
