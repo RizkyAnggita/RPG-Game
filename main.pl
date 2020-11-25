@@ -26,7 +26,7 @@ start :-
     initLocPlayer,
     initProgressQuest,
     initEnemy,
-    character,
+    initCharacter,
     initInventory.
 
 status :-

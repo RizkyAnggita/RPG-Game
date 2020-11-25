@@ -51,7 +51,7 @@ shop :-
                     NEWPOTION1 is POTION1 + 1,
                     NEWGOLD is GOLD - HARGA,
                     retract(inventoryData(ID,ITEM1,ITEM2,ITEM3,ITEM4,POTION1,POTION2,POTION3,POTION4,POTION5,POTION6)),
-                    asserta(inventoryData(ID,ITEM1,ITEM2,ITEM3,ITEM4,POTION1,POTION2,POTION3,POTION4,POTION5,POTION6)),
+                    asserta(inventoryData(ID,ITEM1,ITEM2,ITEM3,ITEM4,NEWPOTION1,POTION2,POTION3,POTION4,POTION5,POTION6)),
                     retract(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL)),
                     asserta(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,NEWGOLD,LEVEL)),
                     write('Potion SM berhasil dibeli'), nl
@@ -178,7 +178,7 @@ shop :-
         )
     ;  
         (
-            write('Maaf gold tidak cukupi, silahkan farming lagi'), nl
+            write('Maaf gold tidak cukup, silakan farming lagi'), nl
         )
      ).
 

@@ -97,7 +97,7 @@ addgold :-
 
 
 /* Pemilihan Karakter*/
-character :- 
+initCharacter :- 
     write('Character selection '), nl,
     write(' 1. Leonardo (Samurai)'), nl,
     write(' 2. Michelangelo (Fighter)'), nl,
