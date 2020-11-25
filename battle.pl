@@ -155,6 +155,17 @@ battleCommand(run, EnemyId) :-
 		enemyData(EnemyId, EnemyName, _, _, _, _),
 		format('~w dealt ~d damage!\n', [EnemyName, EnemyDmg])	
 	), !.
+	
+battleCommand(potion, EnemyId) :-
+	/*
+	
+	INSERT USE POTION HERE
+	
+	*/
+	decreaseUserCD,
+	enemyAttacking(EnemyId, EnemyDmg),
+	enemyData(EnemyId, EnemyName, _, _, _, _),
+	format('~w dealt ~d damage!\n', [EnemyName, EnemyDmg]).
 
 
 % kondisi berhenti battle adalah, run || HP player <= 0 || HP enemy <= 0
