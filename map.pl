@@ -12,6 +12,13 @@ locDojo(3,4).
 locHQ(5,6).
 locBoss(8,8).
 
+
+/* position checker */
+equalPos(X,Y,A,B):-
+    X=:=A,
+    Y=:=B.
+
+
 initLocPlayer :- asserta(locPlayer(1,1)).
 
 /* Pergerakan Player */
