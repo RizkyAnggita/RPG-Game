@@ -1,14 +1,14 @@
 :- include('character.pl').
 :- include('inventory.pl').
 
-/* Buat hilangin warning gaje */
+/* Buat hilangin warning gaje 
 :- discontiguous character/7.
 :- discontiguous getid/2.
 :- discontiguous printstats/0.
 :- discontiguous levelup/0. 
 :- discontiguous addgold/0. 
 :- discontiguous character/0.
-
+*/
 
 
 /* =====================

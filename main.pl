@@ -4,6 +4,7 @@
 :- include('inventory.pl').
 :- include('enemy.pl').
 :- include('battle.pl').
+:- include('store.pl').
 
 print_start :-
     write('LET\'S FIND DONATELLO!'),nl,nl,

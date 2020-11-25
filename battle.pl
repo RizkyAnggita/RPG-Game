@@ -157,11 +157,7 @@ battleCommand(run, EnemyId) :-
 	), !.
 	
 battleCommand(potion, EnemyId) :-
-	/*
-	
-	INSERT USE POTION HERE
-	
-	*/
+	usePotion,
 	decreaseUserCD,
 	enemyAttacking(EnemyId, EnemyDmg),
 	enemyData(EnemyId, EnemyName, _, _, _, _),

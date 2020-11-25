@@ -53,7 +53,7 @@ Enemy(tinggal masuk ke mode battle) */
 sameLoc(X,Y) :-
     locPlayer(X,Y),
     locDojo(X,Y),
-    write('Masuk ke Dojo alias Store'),nl, !.
+    shop, !.
 
 sameLoc(X,Y) :-
     locPlayer(X,Y),
@@ -80,8 +80,8 @@ sameLoc(X,Y) :-
 
 sameLoc(X,Y) :-
     locPlayer(X,Y),
-    enemy(_,Name,X,Y,_,_,_,_,_),
-    write('Mode Battle!'), nl, !.
+    enemy(Id,Name,X,Y,_,_,_,_,_),
+    nl, battle(Id),!.
 
 
 /* Mencetak Map */
