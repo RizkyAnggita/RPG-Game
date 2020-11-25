@@ -1,6 +1,6 @@
 :- include('character.pl').
 
-:- dynamic(inventoryData/7).
+:- dynamic(inventoryData/11).
 
 
 %decodeItemX(<character_id>,<is_item_exist>,<item_id>,<item_name>)
