@@ -20,7 +20,25 @@ shopitem(2,potion_md,60).
 shopitem(3,potion_xl,100).
 shopitem(4,hammer_of_thor,1000).
 shopitem(5,dulcolax,1000).
-shopitem(6,temulawak,500).
+shopitem(6,temulawak,1000).
+shopitem(7,gacha,500).
+
+decodeItem(1,1,1,dagger).
+decodeItem(1,1,2,chakram).
+decodeItem(1,1,3,invisible_cloth).
+decodeItem(1,1,4,chain_mail).
+
+decodeItem(2,1,1,katana).
+decodeItem(2,1,2,long_sword).
+decodeItem(2,1,3,helmet).
+decodeItem(2,1,4,karuta).
+
+decodeItem(3,1,1,brass_knuckle).
+decodeItem(3,1,2,nunchaku).
+decodeItem(3,1,3,hand_bandage).
+decodeItem(3,1,4,armor).
+
+
 
 /* =====================
     Deklarasi Rule 
@@ -118,9 +136,6 @@ shop :-
                     1 =:= 1
                 )
             ),
-            %write('duid cukup'),
-
-
 
             (NUM =:= 5
             ->
@@ -158,22 +173,80 @@ shop :-
                     1 =:= 1
                 )
             ),
-            %write('duid cukup'),
-
 
 
             (NUM =:= 7
             ->
                 (
-                    write('Kamu ngegacha'), nl
+                    random(1,5,ANGKA),
+                    decodeItem(ID,1,ANGKA,HASIL),
+                    write('Selamat ! kamu mendapatkan '),
+                    write(HASIL),
+
+                    (ANGKA =:= 1
+                    ->
+                        (
+                            NEWITEM1 is ITEM1 + 1,
+                            retract(inventoryData(ID,ITEM1,ITEM2,ITEM3,ITEM4,POTION1,POTION2,POTION3,POTION4,POTION5,POTION6)),
+                            asserta(inventoryData(ID,NEWITEM1,ITEM2,ITEM3,ITEM4,POTION1,POTION2,POTION3,POTION4,POTION5,POTION6))
+                        )
+                        ;
+                        (
+                            1 =:= 1
+                        )
                     
+                    
+                    ),
+
+                    (ANGKA =:= 2
+                    ->
+                        (
+                            NEWITEM2 is ITEM2 + 1,
+                            retract(inventoryData(ID,ITEM1,ITEM2,ITEM3,ITEM4,POTION1,POTION2,POTION3,POTION4,POTION5,POTION6)),
+                            asserta(inventoryData(ID,ITEM1,NEWITEM2,ITEM3,ITEM4,POTION1,POTION2,POTION3,POTION4,POTION5,POTION6))
+                        )
+                        ;
+                        (
+                            1 =:= 1
+                        )
+                    
+                    
+                    ),
+
+                    (ANGKA =:= 3
+                    ->
+                        (
+                            NEWITEM3 is ITEM3 + 1,
+                            retract(inventoryData(ID,ITEM1,ITEM2,ITEM3,ITEM4,POTION1,POTION2,POTION3,POTION4,POTION5,POTION6)),
+                            asserta(inventoryData(ID,ITEM1,ITEM2,NEWITEM3,ITEM4,POTION1,POTION2,POTION3,POTION4,POTION5,POTION6))
+                        )
+                        ;
+                        (
+                            1 =:= 1
+                        )
+                    
+                    
+                    ),
+
+                    (ANGKA =:= 4
+                    ->
+                        (
+                            NEWITEM4 is ITEM4 + 1,
+                            retract(inventoryData(ID,ITEM1,ITEM2,ITEM3,ITEM4,POTION1,POTION2,POTION3,POTION4,POTION5,POTION6)),
+                            asserta(inventoryData(ID,ITEM1,ITEM2,ITEM3,NEWITEM4,POTION1,POTION2,POTION3,POTION4,POTION5,POTION6))
+                        )
+                        ;
+                        (
+                            1 =:= 1
+                        )
+                    )
                 )
                 ;
                 (
                     1 =:= 1
                 )
-            ),
-            write('duid cukup')
+            )
+            %write('duid cukup')
 
         )
     ;  

@@ -5,20 +5,25 @@
 
 %decodeItemX(<character_id>,<is_item_exist>,<item_id>,<item_name>)
 decodeItem1(1,1,1,dagger).
-decodeItem1(2,1,2,katana).
-decodeItem1(3,1,3,brass_knuckle).
+decodeItem1(2,1,1,katana).
+decodeItem1(3,1,1,brass_knuckle).
 
-decodeItem2(1,1,4,chakram).
-decodeItem2(2,1,5,long_sword).
-decodeItem2(3,1,6,nunchaku).
+decodeItem2(1,1,2,chakram).
+decodeItem2(2,1,2,long_sword).
+decodeItem2(3,1,2,nunchaku).
 
-decodeItem3(1,1,7,invisible_cloth).
-decodeItem3(2,1,8,helmet).
-decodeItem3(3,1,9,hand_bandage).
+decodeItem3(1,1,3,invisible_cloth).
+decodeItem3(2,1,3,helmet).
+decodeItem3(3,1,3,hand_bandage).
 
-decodeItem4(1,1,10,chain_mail).
-decodeItem4(2,1,11,karuta).
-decodeItem4(3,1,12,armor).
+decodeItem4(1,1,4,chain_mail).
+decodeItem4(2,1,4,karuta).
+decodeItem4(3,1,4,armor).
+
+
+
+
+
 
 decodePotion1(any,1,13,potion_sm).
 decodePotion2(any,1,14,potion_md).
