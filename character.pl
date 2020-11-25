@@ -3,15 +3,10 @@
 ====================== */
 
 /* Buat Hilangin Warning Gaje, abaikan aja */
-:- discontiguous character/7.
-:- discontiguous getid/2.
-:- discontiguous printstats/0.
-:- discontiguous levelup/0. 
-:- discontiguous addgold/0. 
-:- discontiguous character/0.
+
 
 /* Character */
-character(1,leonardo,samurai,120,120,120,10).
+character(1,leonardo,samurai,120,10,120,10).
 character(2,michelangelo,fighter,130,110,120,10).
 character(3,raphael,assassin,120,130,110,10).
 
