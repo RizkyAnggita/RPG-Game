@@ -1,5 +1,3 @@
-%:- include('battle.pl').
-
 :- dynamic(locPlayer/2).
 
 /*Map 10x10*/
