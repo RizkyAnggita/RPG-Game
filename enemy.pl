@@ -16,8 +16,11 @@ testRepeat:-
 /* _-------_ */
 /* | FAKTA | */
 /* ========= */
-/*Enemy default (level 1) = Stage 1 */
+
+/* BOSS */
 enemyData(99, boss, 1000, 200, 300, 70).
+
+/*Enemy default (level 1) = Stage 1 */
 enemyData(1, shredder,150, 10, 30, 1).
 enemyData(2, oozma, 100, 20, 20, 1).
 enemyData(3, kappa, 100, 30, 10, 1).
@@ -32,6 +35,22 @@ enemyData(7, shredder, 400, 40, 90, 10).
 enemyData(8, oozma, 200, 80, 75, 10).
 enemyData(9, kappa, 200, 100, 40, 10).
 
+/* enemy reward */
+/* enemyReward(EnemyId, GoldReward, ExpReward) */
+/* Enemy default (level 1) = Stage 1 */
+enemyReward(1, 15, 30).
+enemyReward(2, 10, 35).
+enemyReward(3, 5, 45).
+
+/* Enemy level 5 = Stage 2*/
+enemyReward(4, 25, 20).
+enemyReward(5, 20, 25).
+enemyReward(6, 20, 35).
+
+/* Enemy level 10 = Stage 3*/
+enemyReward(7, 45, 15).
+enemyReward(8, 60, 15).
+enemyReward(9, 50, 25).
 
 /* Enemy Checker */
 isNoEnemy(_,[]):-!.
