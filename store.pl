@@ -53,6 +53,7 @@ shop :-
     write(' 5. Dulcolax         (+100 Defence)            1000 Gold'), nl,
     write(' 6. Temulawak        (+100 Max HP)             1000 Gold'), nl,
     write(' 7. Gacha            (Menjanjikan kekuatan)    500  Gold'), nl,
+    write(' 8. Cancel'), nl,
     write('Item yang ingin dibeli : '),
     read(NUM), nl,
 
@@ -243,7 +244,18 @@ shop :-
                                     1 =:= 1
                                 )
                             )
+                        ),
+
+                    (NUM =:= 8
+                    ->
+                        (
+                            write('Meninggalkan Store!'),nl, !, fail
                         )
+                        ;
+                        (
+                            1 =:= 1
+                        )
+                    )
                         ;
                         (
                             1 =:= 1

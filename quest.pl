@@ -66,16 +66,20 @@ printWelcomeQuest :-
 
 print_getQuest :-
 	statsQuest(X), X =:= 1,
-	progressQuest(Id,_,_,_),
+	progressQuest(Id,SC,OC,KC),
 	quest(Id,S,O,K,Gold,Exp),
 	print(S), write(' Shredder, '),
 	print(O), write(' Oozma, '),
 	print(K), write(' Kappa. '), nl,
 	write('Anda akan mendapatkan Gold sebanyak '), print(Gold),
-	write(' dan mendapat '), print(Exp), write(' EXP.'), nl, !.
+	write(' dan mendapat '), print(Exp), write(' EXP.'), nl,
+	write('Progress Anda :'), nl,
+	write('Shredder   =>  '), print(SC), nl,
+	write('Oozma      =>  '), print(OC), nl,
+	write('Kappa      =>  '), print(KC), nl,
+	!.
 
 print_getQuest :-
 	statsQuest(X), X =:= 0,
 	write('Anda belum memiliki quest!'),nl,
 	write('Silahkan menuju HeadQuarter'),nl,!.
-
