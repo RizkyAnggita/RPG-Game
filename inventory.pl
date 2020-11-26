@@ -51,7 +51,7 @@ isInventoryNotFull:-
     inventoryData(Char_id,Num_item_1, Num_item_2, Num_item_3, Num_item_4, Num_potion_1, Num_potion_2, Num_potion_3, Num_potion_4, Num_potion_5, Num_potion_6),
     Total_item is Num_item_1 + Num_item_2 + Num_item_3 + Num_item_4 + Num_potion_1 + Num_potion_2 + Num_potion_3 + Num_potion_4 + Num_potion_5 + Num_potion_6,
     write(Total_item),
-    !,Total_item=<100.
+    !,Total_item<100.
 
 inventory :-
     user(CHARACTER,CLASS,_,_,_,_,_,_), 
