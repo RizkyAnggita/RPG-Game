@@ -57,7 +57,7 @@ shop :-
     read(NUM), nl,
 
     shopitem(NUM,NAMAITEM,HARGA),
-    user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL),
+    user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL,XP),
     inventoryData(ID,ITEM1,ITEM2,ITEM3,ITEM4,POTION1,POTION2,POTION3,POTION4,POTION5,POTION6),
     (isInventoryNotFull
     ->
@@ -72,8 +72,8 @@ shop :-
                             NEWGOLD is GOLD - HARGA,
                             retract(inventoryData(ID,ITEM1,ITEM2,ITEM3,ITEM4,POTION1,POTION2,POTION3,POTION4,POTION5,POTION6)),
                             asserta(inventoryData(ID,ITEM1,ITEM2,ITEM3,ITEM4,NEWPOTION1,POTION2,POTION3,POTION4,POTION5,POTION6)),
-                            retract(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL)),
-                            asserta(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,NEWGOLD,LEVEL)),
+                            retract(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL,XP)),
+                            asserta(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,NEWGOLD,LEVEL,XP)),
                             write('Potion SM berhasil dibeli'), nl
                             
                         )
@@ -91,8 +91,8 @@ shop :-
                             NEWGOLD is GOLD - HARGA,
                             retract(inventoryData(ID,ITEM1,ITEM2,ITEM3,ITEM4,POTION1,POTION2,POTION3,POTION4,POTION5,POTION6)),
                             asserta(inventoryData(ID,ITEM1,ITEM2,ITEM3,ITEM4,POTION1,NEWPOTION2,POTION3,POTION4,POTION5,POTION6)),
-                            retract(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL)),
-                            asserta(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,NEWGOLD,LEVEL)),
+                            retract(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL,XP)),
+                            asserta(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,NEWGOLD,LEVEL,XP)),
                             write('Potion MD berhasil dibeli'), nl
                         )
                         ;
@@ -110,8 +110,8 @@ shop :-
                             NEWGOLD is GOLD - HARGA,
                             retract(inventoryData(ID,ITEM1,ITEM2,ITEM3,ITEM4,POTION1,POTION2,POTION3,POTION4,POTION5,POTION6)),
                             asserta(inventoryData(ID,ITEM1,ITEM2,ITEM3,ITEM4,POTION1,POTION2,NEWPOTION3,POTION4,POTION5,POTION6)),
-                            retract(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL)),
-                            asserta(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,NEWGOLD,LEVEL)),
+                            retract(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL,XP)),
+                            asserta(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,NEWGOLD,LEVEL,XP)),
                             write('Potion XL berhasil dibeli'), nl
                         )
                         ;
@@ -129,8 +129,8 @@ shop :-
                             NEWGOLD is GOLD - HARGA,
                             retract(inventoryData(ID,ITEM1,ITEM2,ITEM3,ITEM4,POTION1,POTION2,POTION3,POTION4,POTION5,POTION6)),
                             asserta(inventoryData(ID,ITEM1,ITEM2,ITEM3,ITEM4,POTION1,POTION2,POTION3,NEWPOTION4,POTION5,POTION6)),
-                            retract(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL)),
-                            asserta(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,NEWGOLD,LEVEL)),
+                            retract(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL,XP)),
+                            asserta(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,NEWGOLD,LEVEL,XP)),
                             write('Hammer of Thor berhasil dibeli'), nl
                         )
                         ;
@@ -146,8 +146,8 @@ shop :-
                             NEWGOLD is GOLD - HARGA,
                             retract(inventoryData(ID,ITEM1,ITEM2,ITEM3,ITEM4,POTION1,POTION2,POTION3,POTION4,POTION5,POTION6)),
                             asserta(inventoryData(ID,ITEM1,ITEM2,ITEM3,ITEM4,POTION1,POTION2,POTION3,POTION4,NEWPOTION5,POTION6)),
-                            retract(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL)),
-                            asserta(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,NEWGOLD,LEVEL)),
+                            retract(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL,XP)),
+                            asserta(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,NEWGOLD,LEVEL,XP)),
                             write('Dulcolax berhasil dibeli'), nl
                         )
                         ;
@@ -166,8 +166,8 @@ shop :-
                             NEWGOLD is GOLD - HARGA,
                             retract(inventoryData(ID,ITEM1,ITEM2,ITEM3,ITEM4,POTION1,POTION2,POTION3,POTION4,POTION5,POTION6)),
                             asserta(inventoryData(ID,ITEM1,ITEM2,ITEM3,ITEM4,POTION1,POTION2,POTION3,POTION4,POTION5,NEWPOTION6)),
-                            retract(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL)),
-                            asserta(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,NEWGOLD,LEVEL)),
+                            retract(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL,XP)),
+                            asserta(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,NEWGOLD,LEVEL,XP)),
                             write('Temulawak berhasil dibeli'), nl
                         )
                         ;
