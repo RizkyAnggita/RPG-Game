@@ -20,6 +20,7 @@ print_start :-
     write('% 7. inventory : menampilkan inventory                                            %'),nl,
     write('% 8. help      : menampilkan segala bantuan                                       %'),nl,
     write('% 9. quest     : menampilkan quest dan progress quest yang dimiliki               %'),nl,
+    write('% 9. quit      : keluar dari permainan                                            %'),nl,
     write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'),nl,nl.
 
 
@@ -43,3 +44,16 @@ potion :-
 
 help :-
     print_start.
+
+quit :-
+    retract(locPlayer(_,_)),
+    retract(user(_,_,_,_,_,_,_,_,_,)),
+    retract(progressQuest(_,_,_,_,)),
+    retract(statsQuest(_)),
+    retract(inventoryData(_,_,_,_,_,_,_,_,_,_,_,)),
+    retract(enemy(_,_,_,_,_,_,_,_,_,)),
+    retract(enemiesPos(_)),
+    retract(enemyCurrHP(_)),
+    retract(userSpecialAttackCD(_)),
+    retract(enemySpecialAttackCD(_)),
+    retract(runStatus(_)).
