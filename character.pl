@@ -3,7 +3,7 @@
 ====================== */
 
 /* Character */
-character(1,leonardo,samurai,120,140,120,10,0).
+character(1,leonardo,samurai,120,120,120,10,0).
 character(2,michelangelo,fighter,130,110,120,10,0).
 character(3,raphael,assassin,120,130,110,10,0).
 
