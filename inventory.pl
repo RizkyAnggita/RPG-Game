@@ -78,15 +78,15 @@ usePotion :-
     
     repeat, 
         read(Input),
-    (Input=:=13; Input=:=14; Input=:=15; Input=:=16; Input=:=17; Input=:=18),
-
-    
+    (Input=:=13; Input=:=14; Input=:=15; Input=:=16; Input=:=17; Input=:=18; Input=:=99),
+    kuranginPotion(Input),
+    (Input =:= 99 -> (!,fail); (1=:=1)),
     potionPlusHP(Input, PlusHP),
     user(Char, Class, UserCurrHP, UserHP, UserAtt, UserDef, Gold, Lvl, XP),
     A is UserCurrHP + PlusHP,
     (A > UserHP -> NewCurrHP is UserHP ; NewCurrHP is A),
 
-    kuranginPotion(Input),
+    
 
     retract(user(Char, Class, UserCurrHP, UserHP, UserAtt, UserDef, Gold, Lvl, XP)),
     asserta(user(Char, Class, NewCurrHP, UserHP, UserAtt, UserDef, Gold, Lvl, XP)),!.
@@ -137,20 +137,18 @@ kuranginPotion(Id) :-
         )
         ; (1 =:= 1)
     ),
-    (Id =:= 0 
-    -> 
-        (   
-            cancel.
-        )
-        ; (1 =:= 1)
-    ),
-
     (Id =:= 18 
     -> 
         (   POTION6 > 0,
             NEWPOTION6 is POTION6 - 1,
             retract(inventoryData(ID,ITEM1,ITEM2,ITEM3,ITEM4,POTION1,POTION2,POTION3,POTION4,POTION5,POTION6)),
             asserta(inventoryData(ID,ITEM1,ITEM2,ITEM3,ITEM4,POTION1,POTION2,POTION3,POTION4,POTION5,NEWPOTION6))
+        )
+        ; (1 =:= 1)
+    ),
+    (Id =:= 99 
+    -> 
+        (  nl,write('Tidak jadi menggunakan Potion'), nl
         )
         ; (1 =:= 1)
     )
@@ -179,8 +177,7 @@ printPotion:-
     print(IdPotion4), write('    '), print(POTION4), write('        '), print(NamaPotion4), write('         '), print(PlusHP4),nl,
     print(IdPotion5), write('    '), print(POTION5), write('        '), print(NamaPotion5), write('             '), print(PlusHP5),nl,
     print(IdPotion6), write('    '), print(POTION6), write('        '), print(NamaPotion6), write('             '), print(PlusHP6),nl,
-    write('0        Cancel'),nl.
-
+    write('99    Cancel'),nl.
 
 
 

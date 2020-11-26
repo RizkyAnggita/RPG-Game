@@ -249,7 +249,7 @@ shop :-
                     (NUM =:= 8
                     ->
                         (
-                            cancel
+                            write('Meninggalkan Store!'),nl, !, fail
                         )
                         ;
                         (
