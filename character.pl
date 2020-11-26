@@ -3,9 +3,9 @@
 ====================== */
 
 /* Character */
-character(1,leonardo,samurai,120,40,120,10).
-character(2,michelangelo,fighter,130,110,120,10).
-character(3,raphael,assassin,120,130,110,10).
+character(1,leonardo,samurai,120,40,120,10,0).
+character(2,michelangelo,fighter,130,110,120,10,0).
+character(3,raphael,assassin,120,130,110,10,0).
 
 
 /* Get Id Character*/
@@ -45,14 +45,22 @@ printstats :-
 
 
 /* Level Up */
+conditionLevelUp :-
+    user(_,_,_,_,_,_,_,_,XP),
+    XP < 100, !.
+
+conditionLevelUp :-
+    user(_,_,_,_,_,_,_,_,XP),
+    XP >= 100,
+    levelup.
+
 levelup :-
     user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL,XP),
-    write('Congratulations! Level up'),
+    write('Congratulations! Level up'),nl,
     write(' Character Name   : '),
     write(CHARACTER), nl,
     write(' Chacter Class    : '),
     write(CLASS), nl,
-
     /* Level Up */
     write(' Level            : '),
     write(LEVEL),
@@ -60,7 +68,7 @@ levelup :-
         NEWHEALTH is HEALTH + 10,
         NEWATTACK is ATTACK + 10,
         NEWDEFENCE is DEFENCE + 10,
-        NEWDEFENCE is 0,
+        NEWXP is XP-100,
         retract(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL,XP)), 
         asserta(user(CHARACTER,CLASS,NEWHEALTH,NEWHEALTH,NEWATTACK,NEWDEFENCE,GOLD,NEWLEVEL,NEWXP)),
     write('       =>  '),
@@ -75,7 +83,7 @@ levelup :-
     /* Attack Up */
     write(' Attack           : '),
     write(ATTACK),
-    write('     =>  '),
+    write('      =>  '),
     write(NEWATTACK), nl,
 
     /* Defence Up*/
@@ -88,16 +96,25 @@ levelup :-
     write(GOLD), nl,
 
     write(' XP               : '),
-    write(XP), nl.
+    write(NEWXP), nl.
 
 
 /* Add Gold */
+<<<<<<< HEAD
 addgold(GOLDADDED) :-
     user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL),
     write('Gold gained'), nl,
         NEWGOLD is GOLD + GOLDADDED,
         retract(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL)), 
         asserta(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,NEWGOLD,LEVEL)),
+=======
+addgold :-
+    user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL,XP),
+    write('Gold gained'), nl,
+        NEWGOLD is GOLD + 20,
+        retract(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL,XP)), 
+        asserta(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,NEWGOLD,LEVEL,XP)),
+>>>>>>> 622820fcd25a3d63677bbced06a0f72410dfdaca
     write('Total gold : '),
     write(NEWGOLD).
 
@@ -113,10 +130,10 @@ initCharacter :-
     /* Membaca input berupa angka*/
     read(NUM), nl,
     /* Mencari karakter sesuai angka*/       
-    character(NUM,CHARACTER,CLASS,HEALTH,ATTACK,DEFENCE,GOLD),
+    character(NUM,CHARACTER,CLASS,HEALTH,ATTACK,DEFENCE,GOLD,XP),
     /* Assign karakter dan level ke user */
-    asserta(user(CHARACTER,CLASS,HEALTH,HEALTH,ATTACK,DEFENCE,GOLD,1)),
-    user(CHARACTER,CLASS,_,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL),
+    asserta(user(CHARACTER,CLASS,HEALTH,HEALTH,ATTACK,DEFENCE,GOLD,6,XP)),
+    user(CHARACTER,CLASS,_,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL,XP),
 
     write('Your character is    : '),
     write(CHARACTER), nl,

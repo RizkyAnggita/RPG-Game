@@ -41,20 +41,20 @@ potionPlusHP(18,200).
 
 %inventoryData(char_id,item_1, item_2, item_3, item_4, potion_1, potion_2, potion_3, potion_4, potion_5, potion_6).
 initInventory :-
-    user(CHARACTER,CLASS,_,_,_,_,_,_), 
+    user(CHARACTER,CLASS,_,_,_,_,_,_,_), 
     getid(CHARACTER,Char_id),
     asserta(inventoryData(Char_id,1,0,0,0,5,0,0,0,0,0)).
 
 isInventoryNotFull:-
-    user(CHARACTER,CLASS,_,_,_,_,_,_), 
+    user(CHARACTER,CLASS,_,_,_,_,_,_,_), 
     getid(CHARACTER,Char_id),
     inventoryData(Char_id,Num_item_1, Num_item_2, Num_item_3, Num_item_4, Num_potion_1, Num_potion_2, Num_potion_3, Num_potion_4, Num_potion_5, Num_potion_6),
     Total_item is Num_item_1 + Num_item_2 + Num_item_3 + Num_item_4 + Num_potion_1 + Num_potion_2 + Num_potion_3 + Num_potion_4 + Num_potion_5 + Num_potion_6,
     write(Total_item),
-    !,Total_item=<100.
+    !,Total_item<100.
 
 inventory :-
-    user(CHARACTER,CLASS,_,_,_,_,_,_), 
+    user(CHARACTER,CLASS,_,_,_,_,_,_,_), 
     getid(CHARACTER,Char_id),
     format('Inventory of ~w (~w):~n', [CHARACTER, CLASS]),
     inventoryData(Char_id,Num_item_1, Num_item_2, Num_item_3, Num_item_4, Num_potion_1, Num_potion_2, Num_potion_3, Num_potion_4, Num_potion_5, Num_potion_6),
@@ -82,14 +82,14 @@ usePotion :-
 
     
     potionPlusHP(Input, PlusHP),
-    user(Char, Class, UserCurrHP, UserHP, UserAtt, UserDef, Gold, Lvl),
+    user(Char, Class, UserCurrHP, UserHP, UserAtt, UserDef, Gold, Lvl, XP),
     A is UserCurrHP + PlusHP,
     (A > UserHP -> NewCurrHP is UserHP ; NewCurrHP is A),
 
     kuranginPotion(Input),
 
-    retract(user(Char, Class, UserCurrHP, UserHP, UserAtt, UserDef, Gold, Lvl)),
-    asserta(user(Char, Class, NewCurrHP, UserHP, UserAtt, UserDef, Gold, Lvl)),!.
+    retract(user(Char, Class, UserCurrHP, UserHP, UserAtt, UserDef, Gold, Lvl, XP)),
+    asserta(user(Char, Class, NewCurrHP, UserHP, UserAtt, UserDef, Gold, Lvl, XP)),!.
 
 
 kuranginPotion(Id) :-

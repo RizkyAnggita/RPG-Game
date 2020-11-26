@@ -88,12 +88,29 @@ sameLoc(X,Y) :-
 
 sameLoc(X,Y) :-
 	random(1, 4, EnemyChance),  
-	(EnemyChance =:= 1 ->
-		random(1, 4, EnemyId),
-		battle(EnemyId)
-		;
-		1 =:= 1
-	),!.
+    print(EnemyChance), nl,
+	(EnemyChance =:= 1 -> (
+        user(_, _,_,_, _, _, _, Level,_),
+        print(Level), nl,
+        (Level =< 5 -> (
+            random(1, 3, EnemyId),
+            print(EnemyId), nl,
+		    battle(EnemyId)); (1 =:= 1)
+        ),
+        
+        (Level > 5, Level =<10 -> (
+            random(4, 7, EnemyId),
+            print(EnemyId), nl,
+		    battle(EnemyId)); (1 =:= 1)
+        ),
+        
+        (Level > 10 -> (
+            random(1, 4, EnemyId),
+            print(EnemyId), nl,
+		    battle(EnemyId)); (1 =:= 1)
+        )
+
+        ); 1 =:= 1),!.
 	
 	
 

@@ -132,10 +132,15 @@ initEnemyPosList:-
 
 iePortal :- /*initEnemyPortal*/
     de,
+    user(_, _,_,_, _, _, _, Level,_),
+    (Level =< 5 -> (Stage is 1); (1 =:= 1)),
+    (Level > 5, Level =<10 -> ( Stage is 2); (1 =:= 1)),
+    (Level > 10 -> (Stage is 3); (1 =:= 1)), 
+
     initEnemyPosList,
-    generateShredder(1),
-    generateOozma(1),
-    generateKappa(1).
+    generateShredder(Stage),
+    generateOozma(Stage),
+    generateKappa(Stage).
 
 initEnemy:-
     repeat,iePortal,!.
