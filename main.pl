@@ -28,9 +28,9 @@ start :-
     print_start,
     initLocPlayer,
     initProgressQuest,
-    initEnemy,
     initCharacter,
-    initInventory.
+    initInventory,
+    initEnemy.
 
 status :-
     printstats.
