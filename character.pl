@@ -92,10 +92,10 @@ levelup :-
 
 
 /* Add Gold */
-addgold :-
+addgold(GOLDADDED) :-
     user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL),
     write('Gold gained'), nl,
-        NEWGOLD is GOLD + 20,
+        NEWGOLD is GOLD + GOLDADDED,
         retract(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL)), 
         asserta(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,NEWGOLD,LEVEL)),
     write('Total gold : '),
