@@ -206,7 +206,9 @@ battle(EnemyId):-
 		enemySpecialAttackCD(EnemyCD),
 		retract(userSpecialAttackCD(UserCD)),
 		retract(enemySpecialAttackCD(EnemyCD)),
-		conditionLevelUp		
+		conditionLevelUp
+		;
+		1 =:= 1		
 	).
 
 
