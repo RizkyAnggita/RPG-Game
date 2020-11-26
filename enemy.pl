@@ -51,7 +51,7 @@ assignEnemyPos(X,Y):-
     asserta(enemiesPos(New_list_of_enemy_pos)).
 gsPortal(Stage) :- /*Stage = 1,2,3. Stage 1 => Lvl 1, Stage 2 => Lvl 5, Stage 3 => Lvl 10*/
     ID is Stage*3 - 2,
-    write(ID),nl,
+    %write(ID),nl,
     locDojo(A,B),
     locHQ(C,D),
     locBoss(E,F), 
@@ -59,8 +59,8 @@ gsPortal(Stage) :- /*Stage = 1,2,3. Stage 1 => Lvl 1, Stage 2 => Lvl 5, Stage 3 
     repeat,
         random(2,8,X1),
         random(2,8,Y1),
-        write(X1),write(','),
-        write(Y1),nl,
+        %write(X1),write(','),
+        %write(Y1),nl,
     \+(equalPos(X1,Y1,A,B)),!,
     \+(equalPos(X1,Y1,C,D)),!,
     \+(equalPos(X1,Y1,E,F)),!,
@@ -73,7 +73,7 @@ gsPortal(Stage) :- /*Stage = 1,2,3. Stage 1 => Lvl 1, Stage 2 => Lvl 5, Stage 3 
 
 goPortal(Stage) :-
     ID is Stage*3 - 1,
-    write(ID),nl,
+    %write(ID),nl,
     locDojo(A,B),
     locHQ(C,D),
     locBoss(E,F), 
@@ -81,8 +81,8 @@ goPortal(Stage) :-
     repeat,
         random(2,8,X1),
         random(2,8,Y1),
-        write(X1),write(','),
-        write(Y1),nl,
+        %write(X1),write(','),
+        %write(Y1),nl,
     \+(equalPos(X1,Y1,A,B)),!,
     \+(equalPos(X1,Y1,C,D)),!,
     \+(equalPos(X1,Y1,E,F)),!,
@@ -95,7 +95,7 @@ goPortal(Stage) :-
 
 gkPortal(Stage) :-
     ID is Stage*3,
-    write(ID),nl,
+    %write(ID),nl,
     locDojo(A,B),
     locHQ(C,D),
     locBoss(E,F), 
@@ -103,8 +103,8 @@ gkPortal(Stage) :-
     repeat,
         random(2,8,X1),
         random(2,8,Y1),
-        write(X1),write(','),
-        write(Y1),nl,
+        %write(X1),write(','),
+        %write(Y1),nl,
     \+(equalPos(X1,Y1,A,B)),!,
     \+(equalPos(X1,Y1,C,D)),!,
     \+(equalPos(X1,Y1,E,F)),!,
