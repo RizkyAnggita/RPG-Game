@@ -137,6 +137,14 @@ kuranginPotion(Id) :-
         )
         ; (1 =:= 1)
     ),
+    (Id =:= 0 
+    -> 
+        (   
+            cancel.
+        )
+        ; (1 =:= 1)
+    ),
+
     (Id =:= 18 
     -> 
         (   POTION6 > 0,
@@ -170,7 +178,8 @@ printPotion:-
     print(IdPotion3), write('    '), print(POTION3), write('        '), print(NamaPotion3), write('             '), print(PlusHP3),nl,
     print(IdPotion4), write('    '), print(POTION4), write('        '), print(NamaPotion4), write('         '), print(PlusHP4),nl,
     print(IdPotion5), write('    '), print(POTION5), write('        '), print(NamaPotion5), write('             '), print(PlusHP5),nl,
-    print(IdPotion6), write('    '), print(POTION6), write('        '), print(NamaPotion6), write('             '), print(PlusHP6),nl.
+    print(IdPotion6), write('    '), print(POTION6), write('        '), print(NamaPotion6), write('             '), print(PlusHP6),nl,
+    write('0        Cancel'),nl.
 
 
 
