@@ -44,6 +44,7 @@ potion :-
 
 help :-
     print_start.
+<<<<<<< HEAD
 
 quit :-
     retract(locPlayer(_,_)),
@@ -57,3 +58,5 @@ quit :-
     retract(userSpecialAttackCD(_)),
     retract(enemySpecialAttackCD(_)),
     retract(runStatus(_)).
+=======
+>>>>>>> 27dcdd90d6a081c19e63a2dbb2dfc438154d444e

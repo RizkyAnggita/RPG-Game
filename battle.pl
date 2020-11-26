@@ -185,9 +185,15 @@ battle(EnemyId):-
 	(EnemyCurrentHPNew =< 0; UserCurrentHPNew =< 0; RunStatus =:= 1),
 	(EnemyCurrentHPNew =< 0 ->
 		(EnemyId =:= 99 ->
+<<<<<<< HEAD
 			(1 =:= 1,
 			printGoalState, quit
 			);
+=======
+			1 =:= 1
+			/*Insert tampilan goal state dan quit disini*/
+			;
+>>>>>>> 27dcdd90d6a081c19e63a2dbb2dfc438154d444e
 			enemyReward(EnemyId, GoldReward, ExpReward),
 			addgold(GoldReward),
 			addxp(ExpReward),
@@ -197,9 +203,15 @@ battle(EnemyId):-
 		1 =:= 1
 	),
 	(UserCurrentHPNew =< 0 ->
+<<<<<<< HEAD
 		(1 =:= 1,
 		printFailState, quit
 		);
+=======
+		1 =:= 1
+		/* insert tampilan fail state dan quit disini */
+		;
+>>>>>>> 27dcdd90d6a081c19e63a2dbb2dfc438154d444e
 		retract(enemyCurrHP(EnemyCurrentHPNew)),
 		retract(runStatus(RunStatus)),
 		userSpecialAttackCD(UserCD),
@@ -211,6 +223,7 @@ battle(EnemyId):-
 		1 =:= 1		
 	).
 
+<<<<<<< HEAD
 printGoalState :-
 	write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'),nl,
 	write('%                                                                             %'),nl,
@@ -239,6 +252,9 @@ printFailState :-
 	write('% Kamu tidak berhasil menyelamatkan Donatello dan dia terbunuh.                 %'),nl,
 	write('% Kamu gagal, langkah apa yang akan kamu lakukan?                               %'),nl,
     write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'),nl.
+=======
+
+>>>>>>> 27dcdd90d6a081c19e63a2dbb2dfc438154d444e
 
 	
 %['battle.pl']. character. 1. battle(1).

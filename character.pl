@@ -3,7 +3,7 @@
 ====================== */
 
 /* Character */
-character(1,leonardo,samurai,120,40,120,10,0).
+character(1,leonardo,samurai,120,120,120,10,0).
 character(2,michelangelo,fighter,130,110,120,10,0).
 character(3,raphael,assassin,120,130,110,10,0).
 
@@ -43,6 +43,13 @@ printstats :-
     write('XP               : '),
     write(XP), nl.
 
+
+/* Add Exp */
+addxp(XPADDED) :-
+    user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL,XP),
+        NEWXP is XP + XPADDED,
+        retract(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL,XP)), 
+        asserta(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL,NEWXP)).
 
 /* Level Up */
 conditionLevelUp :-
@@ -101,11 +108,11 @@ levelup :-
 
 /* Add Gold */
 addgold(GOLDADDED) :-
-    user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL),
+    user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL,XP),
     write('Gold gained'), nl,
         NEWGOLD is GOLD + GOLDADDED,
-        retract(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL)), 
-        asserta(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,NEWGOLD,LEVEL)),
+        retract(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL,XP)), 
+        asserta(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,NEWGOLD,LEVEL,XP)),
     write('Total gold : '),
     write(NEWGOLD).
 
