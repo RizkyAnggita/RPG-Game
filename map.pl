@@ -35,10 +35,18 @@ bawah :- locPlayer(X,Y), Y1 is Y+1, retract(locPlayer(X,Y)), asserta(locPlayer(X
 
 
 /* Perintah gerak, input dari user */
-w :- atas, currentlocPlayer.
-a :- kiri, currentlocPlayer.
-s :- bawah, currentlocPlayer.
-d :- kanan, currentlocPlayer.
+w :- 
+	atas, 
+	currentlocPlayer.
+a :- 
+	kiri, 
+	currentlocPlayer.
+s :- 
+	bawah, 
+	currentlocPlayer.
+d :- 
+	kanan, 
+	currentlocPlayer.
 
 /* Untuk mengecek locPlayer(X,Y) dan sameLoc(X,Y) */
 currentlocPlayer:- 
@@ -79,10 +87,23 @@ sameLoc(X,Y) :-
     write('Bertemu Boss!'),nl, !.
 
 sameLoc(X,Y) :-
+	random(1, 4, EnemyChance),  
+	(EnemyChance =:= 1 ->
+		random(1, 4, EnemyId),
+		battle(EnemyId)
+		;
+		1 =:= 1
+	),!.
+	
+	
+
+
+/*
+sameLoc(X,Y) :-
     locPlayer(X,Y),
     enemy(Id,Name,X,Y,_,_,_,_,_),
     nl, battle(Id),!.
-
+*/
 
 /* Mencetak Map */
 printMap(X,Y) :-
