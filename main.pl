@@ -47,11 +47,11 @@ help :-
 
 quit :-
     retract(locPlayer(_,_)),
-    retract(user(_,_,_,_,_,_,_,_,_,)),
-    retract(progressQuest(_,_,_,_,)),
+    retract(user(_,_,_,_,_,_,_,_,_)),
+    retract(progressQuest(_,_,_,_)),
     retract(statsQuest(_)),
-    retract(inventoryData(_,_,_,_,_,_,_,_,_,_,_,)),
-    retract(enemy(_,_,_,_,_,_,_,_,_,)),
+    retract(inventoryData(_,_,_,_,_,_,_,_,_,_,_)),
+    retract(enemy(_,_,_,_,_,_,_,_,_)),
     retract(enemiesPos(_)),
     retract(enemyCurrHP(_)),
     retract(userSpecialAttackCD(_)),

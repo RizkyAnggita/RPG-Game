@@ -183,15 +183,62 @@ battle(EnemyId):-
 		runStatus(RunStatus),
 		nl,
 	(EnemyCurrentHPNew =< 0; UserCurrentHPNew =< 0; RunStatus =:= 1),
-	retract(enemyCurrHP(EnemyCurrentHPNew)),
-	retract(runStatus(RunStatus)),
-	userSpecialAttackCD(UserCD),
-	enemySpecialAttackCD(EnemyCD),
-	retract(userSpecialAttackCD(UserCD)),
-	retract(enemySpecialAttackCD(EnemyCD)),
-	conditionLevelUp.
+	(EnemyCurrentHPNew =< 0 ->
+		(EnemyId =:= 99 ->
+			(1 =:= 1,
+			printGoalState, quit
+			);
+			enemyReward(EnemyId, GoldReward, ExpReward),
+			addgold(GoldReward),
+			addxp(ExpReward),
+			addKillCount(EnemyName)	
+		)
+		;
+		1 =:= 1
+	),
+	(UserCurrentHPNew =< 0 ->
+		(1 =:= 1,
+		printFailState, quit
+		);
+		retract(enemyCurrHP(EnemyCurrentHPNew)),
+		retract(runStatus(RunStatus)),
+		userSpecialAttackCD(UserCD),
+		enemySpecialAttackCD(EnemyCD),
+		retract(userSpecialAttackCD(UserCD)),
+		retract(enemySpecialAttackCD(EnemyCD)),
+		conditionLevelUp
+		;
+		1 =:= 1		
+	).
 
+printGoalState :-
+	write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'),nl,
+	write('%                                                                             %'),nl,
+    write('%   IIIIII   IIIIII  I            I       II      II       I      IIIIIIIII   %'),nl,
+    write('%   I        I       I           I I      I I    I I      I I         I       %'),nl,
+    write('%   IIIIII   IIIIII  I          I   I     I  I  I  I     I   I        I       %'),nl,
+    write('%        I   I       I         I III I    I   II   I    I III I       I       %'),nl,
+    write('%   IIIIII   IIIIII  IIIIII   I       I   I        I   I       I      I       %'),nl,
+	write('%                                                                             %'),nl,
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'),nl,
+	write('% Kamu berhasil menyelamatkan Donatello.                                      %'),nl,
+	write('% Tapi jangan berpuas diri, masih banyak kejahatan yang menanti               %'),nl,
+	write('% untuk diselesaikan                                                          %'),nl,
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'),nl.
 
+printFailState :-
+	write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'),nl,
+	write('%                                                                             %'),nl,
+    write('%        IIIIII        I       IIIIII        I       I                        %'),nl,
+    write('%        I            I I      I            I I      I                        %'),nl,
+    write('%        IIIIIII     I   I     IIIIIII     I   I     I                        %'),nl,
+    write('%        I     I    I III I    I     I    I III I    I                        %'),nl,
+    write('%        IIIIIII   I       I   IIIIIII   I       I   IIIIII                   %'),nl,
+	write('%                                                                             %'),nl,
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'),nl,
+	write('% Kamu tidak berhasil menyelamatkan Donatello dan dia terbunuh.                 %'),nl,
+	write('% Kamu gagal, langkah apa yang akan kamu lakukan?                               %'),nl,
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'),nl.
 
 	
 %['battle.pl']. character. 1. battle(1).
