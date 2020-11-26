@@ -186,7 +186,8 @@ battle(EnemyId):-
 	(EnemyCurrentHPNew =< 0 ->
 		enemyReward(EnemyId, GoldReward, ExpReward),
 		addgold(GoldReward),
-		addxp(ExpReward)
+		addxp(ExpReward),
+		addKillCount(EnemyName)
 		;
 		1 =:= 1
 	),

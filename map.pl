@@ -68,8 +68,17 @@ sameLoc(X,Y) :-
     locHQ(X,Y),
     statsQuest(S), S =:= 1,
     nl, printWelcomeQuest,
-    write('Anda masih memiliki Quest!'), nl,
-    write('Selesaikan misi tersebut!'), !.
+    (questDone ->
+    	progressQuest(QuestId, _, _, _),
+    	quest(QuesteId, _, _, _, GoldReward, ExpReward),
+    	addgold(GoldReward),
+	addxp(ExpReward),
+	resetProgressQuest
+	;
+	write('Anda masih memiliki Quest!'), nl,
+	print_getQuest, nl,
+	write('Selesaikan misi tersebut!')	
+    ), !.
     
 sameLoc(X,Y) :-
     locPlayer(X,Y),

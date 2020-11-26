@@ -1,5 +1,4 @@
 
-:- dynamic(currentQuest/4).
 :- dynamic(progressQuest/4).
 :- dynamic(statsQuest/1).
 
@@ -22,6 +21,9 @@ initProgressQuest :-
 	asserta(progressQuest(0, 0, 0, 0)),
 	asserta(statsQuest(0)).
 
+resetProgressQuest :-
+	progressQuest(QuestId, SC, OC, KC),
+	retract(progressQuest(QuestId, SC, OC, KC)).
 
 getQuest :-
 	progressQuest(QuestId, SC, OC, KC),
@@ -32,23 +34,23 @@ getQuest :-
 
 
 
-addShredderCount :-
+addKillCount(shredder) :-
 	progressQuest(QuestId, SC, OC, KC),
 	NewSC is SC + 1,
 	retract(progressQuest(QuestId, SC, OC, KC)),
-	asserta(progressQuest(QuestId, NewSC, OC, KC)).
+	asserta(progressQuest(QuestId, NewSC, OC, KC)), !.
 
-addOozmaCount :-
+addKillCount(oozma) :-
 	progressQuest(QuestId, SC, OC, KC),
 	NewOC is OC + 1,
 	retract(progressQuest(QuestId, SC, OC, KC)),
-	asserta(progressQuest(QuestId, SC, NewOC, KC)).
+	asserta(progressQuest(QuestId, SC, NewOC, KC)), !.
 
-addKappaCount :-
+addKillCount(kappa) :-
 	progressQuest(QuestId, SC, OC, KC),
 	NewKC is KC + 1,
 	retract(progressQuest(QuestId, SC, OC, KC)),
-	asserta(progressQuest(QuestId, SC, OC, NewKC)).
+	asserta(progressQuest(QuestId, SC, OC, NewKC)), !.
 
 
 
@@ -78,7 +80,7 @@ print_getQuest :-
 	write('Oozma      =>  '), print(OC), nl,
 	write('Kappa      =>  '), print(KC), nl,
 	!.
-
+	
 print_getQuest :-
 	statsQuest(X), X =:= 0,
 	write('Anda belum memiliki quest!'),nl,
