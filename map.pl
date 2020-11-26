@@ -28,9 +28,9 @@ kiri :- locPlayer(1,_), print_mentok, !.
 kiri :- locPlayer(X,Y), X1 is X-1, retract(locPlayer(X,Y)), asserta(locPlayer(X1,Y)), print_kiri.
 kanan :- locPlayer(8,_), print_mentok, !.
 kanan :- locPlayer(X,Y), X1 is X+1, retract(locPlayer(X,Y)), asserta(locPlayer(X1,Y)), print_kanan.
-atas :- locPlayer(1,_), print_mentok, !.
+atas :- locPlayer(_,1), print_mentok, !.
 atas :- locPlayer(X,Y), Y1 is Y-1, retract(locPlayer(X,Y)), asserta(locPlayer(X,Y1)), print_atas.
-bawah :- locPlayer(8,_), print_mentok, !.
+bawah :- locPlayer(_,8), print_mentok, !.
 bawah :- locPlayer(X,Y), Y1 is Y+1, retract(locPlayer(X,Y)), asserta(locPlayer(X,Y1)), print_bawah.
 
 
@@ -85,6 +85,9 @@ sameLoc(X,Y) :-
 
 
 /* Mencetak Map */
+printMap(X,Y) :-
+	enemy(_,_,X,Y,_,_,_,_,_),
+	write('E').
 printMap(X,Y) :- locPlayer(X,Y), write('P').
 printMap(X,Y) :- pagar(X,Y), write('#').
 printMap(X,Y) :- locDojo(X,Y), write('D').
