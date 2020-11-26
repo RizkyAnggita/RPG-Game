@@ -184,20 +184,30 @@ battle(EnemyId):-
 		nl,
 	(EnemyCurrentHPNew =< 0; UserCurrentHPNew =< 0; RunStatus =:= 1),
 	(EnemyCurrentHPNew =< 0 ->
-		enemyReward(EnemyId, GoldReward, ExpReward),
-		addgold(GoldReward),
-		addxp(ExpReward),
-		addKillCount(EnemyName)
+		(EnemyId =:= 99 ->
+			1 =:= 1
+			/*Insert tampilan goal state dan quit disini*/
+			;
+			enemyReward(EnemyId, GoldReward, ExpReward),
+			addgold(GoldReward),
+			addxp(ExpReward),
+			addKillCount(EnemyName)	
+		)
 		;
 		1 =:= 1
 	),
-	retract(enemyCurrHP(EnemyCurrentHPNew)),
-	retract(runStatus(RunStatus)),
-	userSpecialAttackCD(UserCD),
-	enemySpecialAttackCD(EnemyCD),
-	retract(userSpecialAttackCD(UserCD)),
-	retract(enemySpecialAttackCD(EnemyCD)),
-	conditionLevelUp.
+	(UserCurrentHPNew =< 0 ->
+		1 =:= 1
+		/* insert tampilan fail state dan quit disini */
+		;
+		retract(enemyCurrHP(EnemyCurrentHPNew)),
+		retract(runStatus(RunStatus)),
+		userSpecialAttackCD(UserCD),
+		enemySpecialAttackCD(EnemyCD),
+		retract(userSpecialAttackCD(UserCD)),
+		retract(enemySpecialAttackCD(EnemyCD)),
+		conditionLevelUp		
+	).
 
 
 
