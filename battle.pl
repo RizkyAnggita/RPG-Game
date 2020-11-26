@@ -183,6 +183,13 @@ battle(EnemyId):-
 		runStatus(RunStatus),
 		nl,
 	(EnemyCurrentHPNew =< 0; UserCurrentHPNew =< 0; RunStatus =:= 1),
+	(EnemyCurrentHPNew =< 0 ->
+		enemyReward(EnemyId, GoldReward, ExpReward),
+		addgold(GoldReward),
+		addxp(ExpReward)
+		;
+		1 =:= 1
+	),
 	retract(enemyCurrHP(EnemyCurrentHPNew)),
 	retract(runStatus(RunStatus)),
 	userSpecialAttackCD(UserCD),
