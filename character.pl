@@ -14,7 +14,7 @@ getid(michelangelo,2).
 getid(raphael,3).
 
 /* User */
-:- dynamic(user/8).
+:- dynamic(user/9).
 
 
 /* =====================
@@ -23,7 +23,7 @@ getid(raphael,3).
 
 /* Stats */
 printstats :-
-    user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL),
+    user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL,XP),
     write('Character Name   : '),
     write(CHARACTER), nl,
     write('Chacter Class    : '),
@@ -39,12 +39,14 @@ printstats :-
     write('Defence          : '),
     write(DEFENCE), nl,
     write('Gold             : '),
-    write(GOLD), nl.
+    write(GOLD), nl,
+    write('XP               : '),
+    write(XP), nl.
 
 
 /* Level Up */
 levelup :-
-    user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL),
+    user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL,XP),
     write('Congratulations! Level up'),
     write(' Character Name   : '),
     write(CHARACTER), nl,
@@ -58,8 +60,9 @@ levelup :-
         NEWHEALTH is HEALTH + 10,
         NEWATTACK is ATTACK + 10,
         NEWDEFENCE is DEFENCE + 10,
-        retract(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL)), 
-        asserta(user(CHARACTER,CLASS,NEWHEALTH,NEWHEALTH,NEWATTACK,NEWDEFENCE,GOLD,NEWLEVEL)),
+        NEWDEFENCE is 0,
+        retract(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL,XP)), 
+        asserta(user(CHARACTER,CLASS,NEWHEALTH,NEWHEALTH,NEWATTACK,NEWDEFENCE,GOLD,NEWLEVEL,NEWXP)),
     write('       =>  '),
     write(NEWLEVEL), nl,
 
@@ -82,7 +85,10 @@ levelup :-
     write(NEWDEFENCE), nl,
     
     write(' Gold             : '),
-    write(GOLD), nl.
+    write(GOLD), nl,
+
+    write(' XP               : '),
+    write(XP), nl.
 
 
 /* Add Gold */
