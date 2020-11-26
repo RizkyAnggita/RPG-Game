@@ -13,10 +13,10 @@ hurtEnemy(Dmg) :-
 	asserta(enemyCurrHP(EnemyCurrentHPNew)),!.
 	
 hurtUser(Dmg) :-
-	user(Char, Class, UserCurrHP, UserHP, UserAtt, UserDef, Gold, Lvl),
+	user(Char, Class, UserCurrHP, UserHP, UserAtt, UserDef, Gold, Lvl, XP),
 	UserCurrHPNew is UserCurrHP - Dmg,
-	retract(user(Char, Class, UserCurrHP, UserHP, UserAtt, UserDef, Gold, Lvl)),
-	asserta(user(Char, Class, UserCurrHPNew, UserHP, UserAtt, UserDef, Gold, Lvl)),!.
+	retract(user(Char, Class, UserCurrHP, UserHP, UserAtt, UserDef, Gold, Lvl, XP)),
+	asserta(user(Char, Class, UserCurrHPNew, UserHP, UserAtt, UserDef, Gold, Lvl, XP)),!.
 
 increaseUserCD :-
 	userSpecialAttackCD(SpecialAttackCD),
@@ -48,7 +48,7 @@ decreaseEnemyCD.
 
 %calculate damage dealt,
 userAttacking(EnemyId, Dmg):-
-	user(_,_, _, _, UserAtt, _, _, _),
+	user(_,_, _, _, UserAtt, _, _, _,_),
 	enemyData(EnemyId, _, _, _, EnemyDef,_),
 	Dmg is (UserAtt),
 	decreaseUserCD,
@@ -58,7 +58,7 @@ userAttacking(EnemyId, Dmg):-
 userSpecialAttacking(EnemyId, Dmg):-
 	userSpecialAttackCD(SpecialAttackCD),
 	SpecialAttackCD =:= 0,
-	user(_,_, _, _, UserAtt, _, _, _),
+	user(_,_, _, _, UserAtt, _, _, _,_),
 	enemyData(EnemyId, _, _, _, EnemyDef,_),
 	Dmg is (UserAtt * 2),
 	increaseUserCD, 
@@ -73,7 +73,7 @@ userSpecialAttacking(EnemyId, Dmg):-
 	
 
 enemyAttacking(EnemyId, Dmg):-
-	user(_,_, _, _, _, UserDef, _, _),
+	user(_,_, _, _, _, UserDef, _, _,_),
 	enemyData(EnemyId, _, _, EnemyAtt, _, _),
 	enemySpecialAttackCD(EnemyCD),
 	(EnemyCD =:= 0 ->
@@ -102,7 +102,7 @@ printBattleEnemyStat(EnemyId) :-
 	
 
 printBattleUserStat :-
-	user(Char, Class, UserCurrHP, UserHP, UserAtt, UserDef, Gold, Lvl),
+	user(_, _, UserCurrHP, _, _, _, _, _,_),
 	format('Your HP : ~d', [UserCurrHP]).
 
 
@@ -179,7 +179,7 @@ battle(EnemyId):-
 		read(Command),
 		battleCommand(Command, EnemyId),
 		enemyCurrHP(EnemyCurrentHPNew),
-		user(_, _, UserCurrentHPNew, _, _, _, _, _),
+		user(_, _, UserCurrentHPNew, _, _, _, _, _,_),
 		runStatus(RunStatus),
 		nl,
 	(EnemyCurrentHPNew =< 0; UserCurrentHPNew =< 0; RunStatus =:= 1),
@@ -188,7 +188,8 @@ battle(EnemyId):-
 	userSpecialAttackCD(UserCD),
 	enemySpecialAttackCD(EnemyCD),
 	retract(userSpecialAttackCD(UserCD)),
-	retract(enemySpecialAttackCD(EnemyCD)).
+	retract(enemySpecialAttackCD(EnemyCD)),
+	conditionLevelUp.
 
 
 
