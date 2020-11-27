@@ -1,0 +1,5 @@
+user(leonardo,samurai,120,120,120,120,20,1,35).
+locPlayer(4,5).
+inventoryData(1,1,0,0,0,5,0,0,1,1,1).
+progressQuest(1,0,1,0).
+statsQuest(1).

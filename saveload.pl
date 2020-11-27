@@ -16,10 +16,6 @@ save:-
     write(Stream, progressQuest(QuestId, ShredderCount, OozmaCount, KappaCount)), write(Stream, '.\n'),
     statsQuest(A),
     write(Stream, statsQuest(A)), write(Stream, '.\n'),
-    enemy(EID, EName, ElocX, ElocY, EHP, Eattack, Edefense, Elevel, ElostCount ),
-    write(Stream, enemy(EID, EName, ElocX, ElocY, EHP, Eattack, Edefense, Elevel, ElostCount )), write(Stream, '.\n'),
-    enemiesPos(EPos),
-    write(Stream, enemiesPos(EPos)), write(Stream, '.'),
     close(Stream),
     write('\n-----------------------\n\n      [BERHASIL]\n\nData disimpan di:\n >> '), write(Path),nl,nl.
 
@@ -37,8 +33,6 @@ load:-
     retractall(inventoryData(_,_,_,_,_,_,_,_,_,_,_)),
     retractall(progressQuest(_,_,_,_)),
     retractall(statsQuest(_)),
-    retractall(enemy(_,_,_,_,_,_,_,_,_)),
-    retractall(enemiesPos(_)),
 
     open(Path, read, Stream),
     repeat,

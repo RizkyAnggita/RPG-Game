@@ -31,7 +31,7 @@ resetProgressQuest :-
 
 getQuest :-
 	progressQuest(QuestId, SC, OC, KC),
-	random(1, 2, NewQuestId),
+	random(1, 7, NewQuestId),
 	retract(progressQuest(QuestId, SC, OC, KC)),
 	asserta(progressQuest(NewQuestId, 0, 0, 0)),
 	statsQuest(X),
