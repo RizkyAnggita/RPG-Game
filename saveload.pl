@@ -1,13 +1,7 @@
-:- include('character.pl').
-:- include('map.pl').
-:- include('inventory.pl').
-:- include('quest.pl').
-:- include('enemy.pl').
-
 save:-
     write('%%%%%%%%%%%%%%%%%%%%%%%'),nl,
     write('%  SIMPAN PROGRESSMU  %'),nl,
-    write('%%%%%%%%%%%%%%%%%%%%%%%'),nl,
+    write('%%%%%%%%%%%%%%%%%%%%%%%'),nl,nl,
     write('Nama File: '), read(File),
     atom_concat(File, '.txt', Filename),
     atom_concat('./gameMemory/', Filename, Path),
@@ -26,4 +20,32 @@ save:-
     write(Stream, enemy(EID, EName, ElocX, ElocY, EHP, Eattack, Edefense, Elevel, ElostCount )), write(Stream, '.\n'),
     enemiesPos(EPos),
     write(Stream, enemiesPos(EPos)), write(Stream, '.'),
-    close(Stream).
+    close(Stream),
+    write('\n-----------------------\n\n      [BERHASIL]\n\nData disimpan di:\n >> '), write(Path),nl,nl.
+
+load:-
+    nl,
+    write('%%%%%%%%%%%%%%%%%%%%%%%'),nl,
+    write('%      LOAD GAME      %'),nl,
+    write('%%%%%%%%%%%%%%%%%%%%%%%'),nl,nl,
+    write('Masukkan nama File yang ingin diload\n >> '), read(File),
+    atom_concat(File, '.txt', Filename),
+    atom_concat('./gameMemory/', Filename, Path),
+    
+    retractall(user(_,_,_,_,_,_,_,_,_)),
+    retractall(locPlayer(_,_)),
+    retractall(inventoryData(_,_,_,_,_,_,_,_,_,_,_)),
+    retractall(progressQuest(_,_,_,_)),
+    retractall(statsQuest(_)),
+    retractall(enemy(_,_,_,_,_,_,_,_,_)),
+    retractall(enemiesPos(_)),
+
+    open(Path, read, Stream),
+    repeat,
+        read(Stream, Line),
+        assertz(Line),
+    at_end_of_stream(Stream),
+    write('\n-----------------------\n\n      [BERHASIL]\n\nData telah dimuat.\n'),
+    format('~nFile yang dimuat: ~w~n', [Filename]),
+    close(Stream),
+    !.

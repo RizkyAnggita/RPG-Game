@@ -5,6 +5,7 @@
 :- include('enemy.pl').
 :- include('battle.pl').
 :- include('store.pl').
+:- include('saveload.pl').
 
 print_start :-
     write('LET\'S FIND DONATELLO!'),nl,nl,
