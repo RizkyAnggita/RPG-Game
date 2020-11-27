@@ -16,10 +16,10 @@
 shopitem(1,potion_sm,30).
 shopitem(2,potion_md,60).
 shopitem(3,potion_xl,100).
-shopitem(4,hammer_of_thor,1000).
+shopitem(4,sake,1000).
 shopitem(5,dulcolax,1000).
 shopitem(6,temulawak,1000).
-shopitem(7,gacha,500).
+shopitem(7,gacha,1).
 
 decodeItem(1,1,1,dagger).
 decodeItem(1,1,2,chakram).
@@ -47,7 +47,7 @@ shop :-
     write(' 1. Potion SM        (+30 HP)                  30   Gold'), nl,
     write(' 2. Potion MD        (+75 HP)                  60   Gold'), nl,
     write(' 3. Potion XL        (+125 HP)                 100  Gold'), nl,
-    write(' 4. Hammer of Thor   (+100 Attack)             1000 Gold'), nl,
+    write(' 4. Sake             (+100 Attack)             1000 Gold'), nl,
     write(' 5. Dulcolax         (+100 Defence)            1000 Gold'), nl,
     write(' 6. Temulawak        (+100 Max HP)             1000 Gold'), nl,
     write(' 7. Gacha            (Menjanjikan kekuatan)    500  Gold'), nl,
@@ -130,7 +130,7 @@ shop :-
                             asserta(inventoryData(ID,ITEM1,ITEM2,ITEM3,ITEM4,POTION1,POTION2,POTION3,NEWPOTION4,POTION5,POTION6)),
                             retract(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL,XP)),
                             asserta(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,NEWGOLD,LEVEL,XP)),
-                            write('Hammer of Thor berhasil dibeli'), nl
+                            write('Sake berhasil dibeli'), nl
                         )
                         ;
                         (

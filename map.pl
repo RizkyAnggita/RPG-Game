@@ -73,7 +73,8 @@ sameLoc(X,Y) :-
     	quest(QuestId, _, _, _, GoldReward, ExpReward),
     	addgold(GoldReward),
 	addxp(ExpReward),
-	resetProgressQuest
+	resetProgressQuest,
+	write('Selamat! Anda telah menyelesaikan quest!'),nl,nl
 	;
 	write('Anda masih memiliki Quest!'), nl,
 	print_getQuest, nl,

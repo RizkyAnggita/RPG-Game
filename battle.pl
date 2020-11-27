@@ -148,6 +148,7 @@ battleCommand(run, EnemyId) :-
 		retract(runStatus(RunStatus)),
 		asserta(runStatus(1))
 		;
+		write('You failed to run!'),nl,
 		enemyAttacking(EnemyId, EnemyDmg),
 		enemyData(EnemyId, EnemyName, _, _, _, _),
 		format('~w dealt ~d damage!\n', [EnemyName, EnemyDmg])	

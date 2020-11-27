@@ -20,7 +20,7 @@ decodeItem4(3,1,4,armor).
 decodePotion1(any,1,13,potion_sm).
 decodePotion2(any,1,14,potion_md).
 decodePotion3(any,1,15,potion_xl).
-decodePotion4(any,1,16,hammer_of_thor).
+decodePotion4(any,1,16,sake).
 decodePotion5(any,1,17,dulcolax).
 decodePotion6(any,1,18,temulawak).
 
@@ -31,6 +31,8 @@ potionPlus(15,125).
 potionPlus(16,100).
 potionPlus(17,100).
 potionPlus(18,100).
+potionPlus(99,0).
+
 
 %inventoryData(char_id,item_1, item_2, item_3, item_4, potion_1, potion_2, potion_3, potion_4, potion_5, potion_6).
 initInventory :-
@@ -43,7 +45,6 @@ isInventoryNotFull:-
     getid(CHARACTER,Char_id),
     inventoryData(Char_id,Num_item_1, Num_item_2, Num_item_3, Num_item_4, Num_potion_1, Num_potion_2, Num_potion_3, Num_potion_4, Num_potion_5, Num_potion_6),
     Total_item is Num_item_1 + Num_item_2 + Num_item_3 + Num_item_4 + Num_potion_1 + Num_potion_2 + Num_potion_3 + Num_potion_4 + Num_potion_5 + Num_potion_6,
-    write(Total_item),
     !,Total_item<100.
 
 inventory :-
