@@ -23,13 +23,18 @@ initProgressQuest :-
 
 resetProgressQuest :-
 	progressQuest(QuestId, SC, OC, KC),
-	retract(progressQuest(QuestId, SC, OC, KC)).
+	retract(progressQuest(QuestId, SC, OC, KC)),
+	statsQuest(X),
+	retract(statsQuest(X)),
+	asserta(statsQuest(0)), !.
 
 getQuest :-
 	progressQuest(QuestId, SC, OC, KC),
 	random(1, 7, NewQuestId),
 	retract(progressQuest(QuestId, SC, OC, KC)),
 	asserta(progressQuest(NewQuestId, 0, 0, 0)),
+	statsQuest(X),
+	retract(statsQuest(X)),
 	asserta(statsQuest(1)), !.
 
 
