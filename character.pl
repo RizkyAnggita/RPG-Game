@@ -114,7 +114,7 @@ addgold(GOLDADDED) :-
         retract(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL,XP)), 
         asserta(user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,NEWGOLD,LEVEL,XP)),
     write('Total gold : '),
-    write(NEWGOLD).
+    write(NEWGOLD),nl,nl.
 
 
 /* Pemilihan Karakter*/

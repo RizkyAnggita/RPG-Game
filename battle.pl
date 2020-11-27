@@ -47,8 +47,9 @@ decreaseEnemyCD.
 userAttacking(EnemyId, Dmg):-
 	user(_,_, _, _, UserAtt, _, _, _,_),
 	enemyData(EnemyId, _, _, _, EnemyDef,_),
-	Dmg is 	UserAtt- EnemyDef,
-	(Dmg > 0 -> (hurtEnemy(Dmg)); (hurtEnemy(0))),
+	DmgCurr is 	UserAtt- EnemyDef,
+	(DmgCurr > 0 -> (Dmg is DmgCurr); Dmg is 0),
+	hurtEnemy(Dmg),
 	decreaseUserCD, !.
 	
 userSpecialAttacking(EnemyId, Dmg):-
@@ -56,8 +57,9 @@ userSpecialAttacking(EnemyId, Dmg):-
 	SpecialAttackCD =:= 0,
 	user(_,_, _, _, UserAtt, _, _, _,_),
 	enemyData(EnemyId, _, _, _, EnemyDef,_),
-	Dmg is (UserAtt * 2) - EnemyDef ,
-	(Dmg > 0 -> (hurtEnemy(Dmg)); (hurtEnemy(0))),
+	DmgCurr is 	(UserAtt * 2)- EnemyDef,
+	(DmgCurr > 0 -> (Dmg is DmgCurr); Dmg is 0),
+	hurtEnemy(Dmg),
 	increaseUserCD, !.
 
 userSpecialAttacking(_, Dmg):-
@@ -74,17 +76,18 @@ enemyAttacking(EnemyId, Dmg):-
 	(EnemyCD =:= 0 ->
 		random(1, 4, X),
 		(X =:= 1 ->
-			Dmg is (EnemyAtt * 2) - UserDef ,
+			DmgCurr is (EnemyAtt * 2) - UserDef ,
 			increaseEnemyCD
 			;
-			Dmg is (EnemyAtt) - UserDef,
+			DmgCurr is (EnemyAtt) - UserDef,
 			decreaseEnemyCD
 		)
 		;
-		Dmg is (EnemyAtt) - UserDef,
+		DmgCurr is (EnemyAtt) - UserDef,
 		decreaseEnemyCD	
 	),
-	(Dmg > 0 -> (hurtUser(Dmg)); (hurtUser(0))), !.
+	(DmgCurr > 0 -> Dmg is DmgCurr ; Dmg is 0 ), 
+	hurtUser(Dmg),!.
 
 printBattleEnemyStat(EnemyId) :-
 	enemyCurrHP(CurrHP),

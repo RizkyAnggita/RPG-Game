@@ -93,7 +93,8 @@ sameLoc(X,Y) :-
 sameLoc(X,Y) :-
     locPlayer(X,Y),
     locBoss(X,Y),
-    write('Bertemu Boss!'),nl, !.
+    write('Bertemu Boss!'),nl, 
+    battle(99),!.
 
 sameLoc(X,Y) :-
     locPlayer(X,Y),
