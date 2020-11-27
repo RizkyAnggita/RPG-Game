@@ -97,11 +97,11 @@ sameLoc(X,Y) :-
 
 sameLoc(X,Y) :-
     locPlayer(X,Y),
-	random(1, 4, EnemyChance),  
+	random(1, 5, EnemyChance),  
 	(EnemyChance =:= 1 -> (
         user(_, _,_,_, _, _, _, Level,_),
         (Level =< 5 -> (
-            random(1, 3, EnemyId),
+            random(1, 4, EnemyId),
 		    battle(EnemyId)); (1 =:= 1)
         ),
         
@@ -111,7 +111,7 @@ sameLoc(X,Y) :-
         ),
         
         (Level > 10 -> (
-            random(1, 4, EnemyId),
+            random(7, 10, EnemyId),
 		    battle(EnemyId)); (1 =:= 1)
         )
 
@@ -143,9 +143,6 @@ teleport(X,Y) :-
     write('Anda kami kembalikan ke posisi sebelumnya'),nl,!.
 
 /* Mencetak Map */
-printMap(X,Y) :-
-	enemy(_,_,X,Y,_,_,_,_,_),
-	write('E').
 printMap(X,Y) :- locPlayer(X,Y), write('P').
 printMap(X,Y) :- pagar(X,Y), write('#').
 printMap(X,Y) :- locDojo(X,Y), write('D').
