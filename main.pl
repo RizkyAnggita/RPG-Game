@@ -29,6 +29,15 @@ print_start :-
 
 
 start :-
+    /*bersih-bersih Fakta ^^*/
+    retractall(user(_,_,_,_,_,_,_,_,_)),
+    retractall(locPlayer(_,_)),
+    retractall(inventoryData(_,_,_,_,_,_,_,_,_,_,_)),
+    retractall(progressQuest(_,_,_,_)),
+    retractall(statsQuest(_)),
+    retractall(enemy(_,_,_,_,_,_,_,_,_)),
+    retractall(enemiesPos(_)),
+
     print_start,
     initLocPlayer,
     initProgressQuest,

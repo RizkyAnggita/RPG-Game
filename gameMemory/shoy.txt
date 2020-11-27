@@ -3,5 +3,5 @@ locPlayer(1,1).
 inventoryData(2,1,0,0,0,5,0,0,1,1,1).
 progressQuest(0,0,0,0).
 statsQuest(0).
-enemy(3,kappa,3,7,100,30,10,1,0).
-enemiesPos([3,7,5,7,6,5]).
+enemy(3,kappa,2,5,100,30,10,1,0).
+enemiesPos([2,5,7,7,4,7]).
