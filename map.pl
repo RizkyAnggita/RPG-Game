@@ -131,6 +131,21 @@ sameLoc(X,Y) :-
     nl, battle(Id),!.
 */
 
+/* Teleport */
+
+teleport(X,Y) :-
+    areaPlay(X,Y),
+    retract(locPlayer(_,_)),
+    asserta(locPlayer(X,Y)),
+    write('Anda berhasil teleport ke lokasi ('),
+    print(X), write(','), print(Y), write(') !'),nl,
+    sameLoc(X,Y).
+
+teleport(X,Y) :-
+    \+(areaPlay(X,Y)),
+    write('Oops! Anda teleport ke area luar map!'), nl,
+    write('Anda kami kembalikan ke posisi sebelumnya'),nl,!.
+
 /* Mencetak Map */
 printMap(X,Y) :-
 	enemy(_,_,X,Y,_,_,_,_,_),
