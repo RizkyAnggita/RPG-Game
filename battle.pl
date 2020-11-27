@@ -1,6 +1,3 @@
-:- include('character.pl').
-:- include('enemy.pl').
-
 :- dynamic(enemyCurrHP/1).
 :- dynamic(userSpecialAttackCD/1).
 :- dynamic(enemySpecialAttackCD/1).
@@ -50,22 +47,20 @@ decreaseEnemyCD.
 userAttacking(EnemyId, Dmg):-
 	user(_,_, _, _, UserAtt, _, _, _,_),
 	enemyData(EnemyId, _, _, _, EnemyDef,_),
-	Dmg is (UserAtt),
-	decreaseUserCD,
-	hurtEnemy(Dmg),!.
-	%rumus dmg masih belum pasti
+	Dmg is 	UserAtt- EnemyDef,
+	(Dmg > 0 -> (hurtEnemy(Dmg)); (hurtEnemy(0))),
+	decreaseUserCD, !.
 	
 userSpecialAttacking(EnemyId, Dmg):-
 	userSpecialAttackCD(SpecialAttackCD),
 	SpecialAttackCD =:= 0,
 	user(_,_, _, _, UserAtt, _, _, _,_),
 	enemyData(EnemyId, _, _, _, EnemyDef,_),
-	Dmg is (UserAtt * 2),
-	increaseUserCD, 
-	hurtEnemy(Dmg),!.
-	%rumus dmg masih belum pasti
+	Dmg is (UserAtt * 2) - EnemyDef ,
+	(Dmg > 0 -> (hurtEnemy(Dmg)); (hurtEnemy(0))),
+	increaseUserCD, !.
 
-userSpecialAttacking(EnemyId, Dmg):-
+userSpecialAttacking(_, Dmg):-
 	userSpecialAttackCD(SpecialAttackCD),
 	SpecialAttackCD =\= 0,
 	Dmg is 0,
@@ -79,18 +74,17 @@ enemyAttacking(EnemyId, Dmg):-
 	(EnemyCD =:= 0 ->
 		random(1, 4, X),
 		(X =:= 1 ->
-			Dmg is (EnemyAtt * 2),
+			Dmg is (EnemyAtt * 2) - UserDef ,
 			increaseEnemyCD
 			;
-			Dmg is (EnemyAtt),
+			Dmg is (EnemyAtt) - UserDef,
 			decreaseEnemyCD
 		)
 		;
-		Dmg is (EnemyAtt),
+		Dmg is (EnemyAtt) - UserDef,
 		decreaseEnemyCD	
 	),
-	hurtUser(Dmg),!.
-	%rumus dmg masih belum pasti
+	(Dmg > 0 -> (hurtUser(Dmg)); (hurtUser(0))), !.
 
 printBattleEnemyStat(EnemyId) :-
 	enemyCurrHP(CurrHP),
