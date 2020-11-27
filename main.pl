@@ -5,27 +5,39 @@
 :- include('enemy.pl').
 :- include('battle.pl').
 :- include('store.pl').
+:- include('saveload.pl').
 
 print_start :-
     write('LET\'S FIND DONATELLO!'),nl,nl,
-    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'),nl,
-    write('%                              ~Find Donatello~                                   %'),nl,
-    write('% 1. start     : untuk memulai petualanganmu                                      %'),nl,
-    write('% 2. map       : menampilkan peta                                                 %'),nl,
-    write('% 3. status    : menampilkan status pemain                                        %'),nl,
-    write('% 4. w         : gerak ke utara 1 langkah                                         %'),nl,
-    write('% 7. a         : gerak ke barat 1 langkah                                         %'),nl,
-    write('% 5. s         : gerak ke selatan 1 langkah                                       %'),nl,
-    write('% 6. d         : gerak ke timur 1 langkah                                         %'),nl,
-    write('% 7. inventory : menampilkan inventory                                            %'),nl,
-    write('% 8. help      : menampilkan segala bantuan                                       %'),nl,
-    write('% 9. quest     : menampilkan quest dan progress quest yang dimiliki               %'),nl,
-    write('% 9. quit      : keluar dari permainan                                            %'),nl,
-    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'),nl,nl.
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'),nl,
+    write('%                               ~Find Donatello~                                   %'),nl,
+    write('% 1.  start     : untuk memulai petualanganmu                                      %'),nl,
+    write('% 2.  map       : menampilkan peta                                                 %'),nl,
+    write('% 3.  status    : menampilkan status pemain                                        %'),nl,
+    write('% 4.  w         : gerak ke utara 1 langkah                                         %'),nl,
+    write('% 7.  a         : gerak ke barat 1 langkah                                         %'),nl,
+    write('% 5.  s         : gerak ke selatan 1 langkah                                       %'),nl,
+    write('% 6.  d         : gerak ke timur 1 langkah                                         %'),nl,
+    write('% 7.  inventory : menampilkan inventory                                            %'),nl,
+    write('% 8.  help      : menampilkan segala bantuan                                       %'),nl,
+    write('% 9.  quest     : menampilkan quest dan progress quest yang dimiliki               %'),nl,
+    write('% 10. save      : menyimpan progress                                               %'),nl,
+    write('% 11. load      : memuat progress yang sudah disimpan                              %'),nl,
+    write('% 12. quit      : keluar dari permainan                                            %'),nl,
+    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'),nl,nl.
 
 
 
 start :-
+    /*bersih-bersih Fakta ^^*/
+    retractall(user(_,_,_,_,_,_,_,_,_)),
+    retractall(locPlayer(_,_)),
+    retractall(inventoryData(_,_,_,_,_,_,_,_,_,_,_)),
+    retractall(progressQuest(_,_,_,_)),
+    retractall(statsQuest(_)),
+    retractall(enemy(_,_,_,_,_,_,_,_,_)),
+    retractall(enemiesPos(_)),
+
     print_start,
     initLocPlayer,
     initProgressQuest,

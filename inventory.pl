@@ -34,7 +34,7 @@ potionPlus(18,100).
 potionPlus(99,0).
 
 
-%inventoryData(char_id,item_1, item_2, item_3, item_4, potion_1, potion_2, potion_3, potion_4, potion_5, potion_6).
+%inventoryData(Char_id, Item_1, Item_2, Item_3, Item_4, Potion_1, Potion_2, Potion_3, Potion_4, Potion_5, Potion_6).
 initInventory :-
     user(CHARACTER,_,_,_,_,_,_,_,_), 
     getid(CHARACTER,Char_id),
