@@ -1,5 +1,3 @@
-:- include('character.pl').
-:- include('inventory.pl').
 
 /* Buat hilangin warning gaje 
 :- discontiguous character/7.
@@ -57,7 +55,7 @@ shop :-
     write('Item yang ingin dibeli : '),
     read(NUM), nl,
 
-    shopitem(NUM,NAMAITEM,HARGA),
+    shopitem(NUM,_,HARGA),
     user(CHARACTER,CLASS,CURRENTHEALTH,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL,XP),
     inventoryData(ID,ITEM1,ITEM2,ITEM3,ITEM4,POTION1,POTION2,POTION3,POTION4,POTION5,POTION6),
     (isInventoryNotFull

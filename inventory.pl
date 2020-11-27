@@ -34,12 +34,12 @@ potionPlus(18,100).
 
 %inventoryData(char_id,item_1, item_2, item_3, item_4, potion_1, potion_2, potion_3, potion_4, potion_5, potion_6).
 initInventory :-
-    user(CHARACTER,CLASS,_,_,_,_,_,_,_), 
+    user(CHARACTER,_,_,_,_,_,_,_,_), 
     getid(CHARACTER,Char_id),
     asserta(inventoryData(Char_id,1,0,0,0,5,0,0,1,1,1)).
 
 isInventoryNotFull:-
-    user(CHARACTER,CLASS,_,_,_,_,_,_,_), 
+    user(CHARACTER,_,_,_,_,_,_,_,_), 
     getid(CHARACTER,Char_id),
     inventoryData(Char_id,Num_item_1, Num_item_2, Num_item_3, Num_item_4, Num_potion_1, Num_potion_2, Num_potion_3, Num_potion_4, Num_potion_5, Num_potion_6),
     Total_item is Num_item_1 + Num_item_2 + Num_item_3 + Num_item_4 + Num_potion_1 + Num_potion_2 + Num_potion_3 + Num_potion_4 + Num_potion_5 + Num_potion_6,

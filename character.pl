@@ -130,7 +130,7 @@ initCharacter :-
     /* Mencari karakter sesuai angka*/       
     character(NUM,CHARACTER,CLASS,HEALTH,ATTACK,DEFENCE,GOLD,XP),
     /* Assign karakter dan level ke user */
-    asserta(user(CHARACTER,CLASS,HEALTH,HEALTH,ATTACK,DEFENCE,GOLD,6,XP)),
+    asserta(user(CHARACTER,CLASS,HEALTH,HEALTH,ATTACK,DEFENCE,GOLD,1,XP)),
     user(CHARACTER,CLASS,_,HEALTH,ATTACK,DEFENCE,GOLD,LEVEL,XP),
 
     write('Your character is    : '),

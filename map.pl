@@ -70,7 +70,7 @@ sameLoc(X,Y) :-
     nl, printWelcomeQuest,
     (questDone ->
     	progressQuest(QuestId, _, _, _),
-    	quest(QuesteId, _, _, _, GoldReward, ExpReward),
+    	quest(QuestId, _, _, _, GoldReward, ExpReward),
     	addgold(GoldReward),
 	addxp(ExpReward),
 	resetProgressQuest
@@ -96,26 +96,22 @@ sameLoc(X,Y) :-
     write('Bertemu Boss!'),nl, !.
 
 sameLoc(X,Y) :-
+    locPlayer(X,Y),
 	random(1, 4, EnemyChance),  
-    print(EnemyChance), nl,
 	(EnemyChance =:= 1 -> (
         user(_, _,_,_, _, _, _, Level,_),
-        print(Level), nl,
         (Level =< 5 -> (
             random(1, 3, EnemyId),
-            print(EnemyId), nl,
 		    battle(EnemyId)); (1 =:= 1)
         ),
         
         (Level > 5, Level =<10 -> (
             random(4, 7, EnemyId),
-            print(EnemyId), nl,
 		    battle(EnemyId)); (1 =:= 1)
         ),
         
         (Level > 10 -> (
             random(1, 4, EnemyId),
-            print(EnemyId), nl,
 		    battle(EnemyId)); (1 =:= 1)
         )
 

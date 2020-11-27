@@ -1,5 +1,3 @@
-:- include('map.pl').
-
 :- dynamic(enemy/9).
 :- dynamic(enemiesPos/1). /* List of Enemy */
 %/* enemy(ID, Name, locX, locY, HP, attack, defense, level, lostCount )
@@ -55,7 +53,7 @@ enemyReward(9, 50, 25).
 /* Enemy Checker */
 isNoEnemy(_,[]):-!.
 isNoEnemy(New_enemy_pos,List_of_enemy_pos):-
-    [X,Y|T] = New_enemy_pos,
+    [X,Y|_] = New_enemy_pos,
     [X1,Y1|T1] = List_of_enemy_pos,
     \+(equalPos(X,Y,X1,Y1)),!,
     isNoEnemy(New_enemy_pos,T1).
