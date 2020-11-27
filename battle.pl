@@ -214,31 +214,31 @@ battle(EnemyId):-
 printGoalState :-
 	write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'),nl,
 	write('%                                                                             %'),nl,
-    write('%   IIIIII   IIIIII  I            I       II      II       I      IIIIIIIII   %'),nl,
-    write('%   I        I       I           I I      I I    I I      I I         I       %'),nl,
-    write('%   IIIIII   IIIIII  I          I   I     I  I  I  I     I   I        I       %'),nl,
-    write('%        I   I       I         I III I    I   II   I    I III I       I       %'),nl,
-    write('%   IIIIII   IIIIII  IIIIII   I       I   I        I   I       I      I       %'),nl,
+	write('%   IIIIII   IIIIII  I            I       II      II       I      IIIIIIIII   %'),nl,
+	write('%   I        I       I           I I      I I    I I      I I         I       %'),nl,
+	write('%   IIIIII   IIIIII  I          I   I     I  I  I  I     I   I        I       %'),nl,
+	write('%        I   I       I         I III I    I   II   I    I III I       I       %'),nl,
+	write('%   IIIIII   IIIIII  IIIIII   I       I   I        I   I       I      I       %'),nl,
 	write('%                                                                             %'),nl,
-    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'),nl,
+	write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'),nl,
 	write('% Kamu berhasil menyelamatkan Donatello.                                      %'),nl,
 	write('% Tapi jangan berpuas diri, masih banyak kejahatan yang menanti               %'),nl,
 	write('% untuk diselesaikan                                                          %'),nl,
-    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'),nl.
+	write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'),nl.
 
 printFailState :-
 	write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'),nl,
 	write('%                                                                             %'),nl,
-    write('%        IIIIII        I       IIIIII        I       I                        %'),nl,
-    write('%        I            I I      I            I I      I                        %'),nl,
-    write('%        IIIIIII     I   I     IIIIIII     I   I     I                        %'),nl,
-    write('%        I     I    I III I    I     I    I III I    I                        %'),nl,
-    write('%        IIIIIII   I       I   IIIIIII   I       I   IIIIII                   %'),nl,
+	write('%        IIIIII        I       IIIIII        I       I                        %'),nl,
+	write('%        I            I I      I            I I      I                        %'),nl,
+	write('%        IIIIIII     I   I     IIIIIII     I   I     I                        %'),nl,
+	write('%        I     I    I III I    I     I    I III I    I                        %'),nl,
+	write('%        IIIIIII   I       I   IIIIIII   I       I   IIIIII                   %'),nl,
 	write('%                                                                             %'),nl,
-    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'),nl,
-	write('% Kamu tidak berhasil menyelamatkan Donatello dan dia terbunuh.                 %'),nl,
-	write('% Kamu gagal, langkah apa yang akan kamu lakukan?                               %'),nl,
-    write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'),nl.
+	write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'),nl,
+	write('% Kamu tidak berhasil menyelamatkan Donatello dan dia terbunuh.               %'),nl,
+	write('% Kamu gagal, langkah apa yang akan kamu lakukan?                             %'),nl,
+	write('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%'),nl.
 
 	
 %['battle.pl']. character. 1. battle(1).
